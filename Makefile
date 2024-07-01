@@ -1,15 +1,15 @@
-NAME = minishell
+NAME = push_swap
 
 CC = cc
-CFLAGS = -g #-Wall -Wextra -Werror #-lreadline
+CFLAGS = -g -Wall -Wextra -Werror
 
 
 LIBFT_DIR	= libft
 SRC_DIR		= src
 OBJ_DIR		= obj
-INC_DIR		= include
+INC_DIR		= inc
 
-SRC =		$(SRC_DIR)/testing.c $(SRC_DIR)/utils.c $(SRC_DIR)/init.c $(SRC_DIR)/free.c
+SRC =		$(SRC_DIR)/main.c $(SRC_DIR)/ $(SRC_DIR)/ $(SRC_DIR)/
 
 
 OBJ			= $(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
