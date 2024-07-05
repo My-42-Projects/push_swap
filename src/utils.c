@@ -1,34 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dulrich <dulrich@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/27 14:30:44 by dulrich           #+#    #+#             */
-/*   Updated: 2024/07/04 21:00:15 by dulrich          ###   ########.fr       */
+/*   Created: 2024/07/01 13:42:35 by dulrich           #+#    #+#             */
+/*   Updated: 2024/07/01 14:05:32 by dulrich          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
- #define PUSH_SWAP_H
+#include "../inc/push_swap.h"
 
-# include <stdlib.h>
-# include <stdio.h>
-# include <stdbool.h>
-# include <unistd.h>
-# include <limits.h>
-# include "../libft/libft.h"
-
-typedef struct s_link
+long	ft_atol(char *str)
 {
-	struct s_node	*next;
-	struct s_node	*prev;
-	int				nbr;
-	int				index;
-	
-} t_link;
+	long	nbr;
+	int		i;
+	int		sign;
 
-//Functions
-
-#endif
+	sign = 1;
+	i = 0;
+	while (str[i] && (str[i] == ' ' || (str[i] >= 9 && str[i] <= 13)))
+		i++;
+	if (str[i] == '-' || str[i] == '+')
+	{
+		if (str[i] == '-')
+			sign = -1;
+		i++;
+	}
+	while (str[i] >= '0' && str[i] <= '9')
+	{
+		nbr *= 10;
+		nbr += (str[i++] - 48);
+	}
+	return (nbr * sign);
+}

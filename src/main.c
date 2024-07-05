@@ -6,34 +6,38 @@
 /*   By: dulrich <dulrich@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 14:30:08 by dulrich           #+#    #+#             */
-/*   Updated: 2024/07/01 13:42:20 by dulrich          ###   ########.fr       */
+/*   Updated: 2024/07/04 21:11:49 by dulrich          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/push_swap.h"
 
-char	**artificial_argv()
-{
-	
-}
-
-void	push_swap(t_node **a, t_node **b)
-{
-	
-}
-
-void	sort_five(t_node **a, t_node **b)
+void	push_swap(t_link **a, t_link **b)
 {
 	/* 
-	push two nodes to stack b
-	do sort_three
-	
+	Push everything but three nbrs to stack b
+	Then calculate the nbr of moves necessary to get each item in its correct position
+	Do the one with the least nbr of moves first
 	 */
-	pb(a);
-	pb(a);
 }
 
-void	sort_three(t_node *stack)
+void	sort_five(t_link *a, t_link *b)
+{
+	pb(a);
+	pb(a);
+	sort_three(a);
+	if (b->nbr > b->next->nbr)
+			sb(b);
+	while (b)
+	{
+		while (b->nbr > a->nbr && b->nbr < a->next->nbr)
+			ra(a);
+		pa(b);
+		b = b->next;
+	}
+}
+
+void	sort_three(t_link *stack)
 {
 	if ((stack->nbr > stack->next->nbr) && 
 	(stack->nbr > stack->next->next->nbr))
@@ -57,19 +61,44 @@ void	sort_three(t_node *stack)
 	}
 }
 
-int	is_sorted(t_node *stack)
+int	is_sorted(t_link *stack)
 {
 	
 }
 
-t_node	**clone_stack(t_node *a)
+int	stack_len(t_link *stack)
 {
-	
+	int	i;
+
+	i = 0;
+	while (stack)
+	{
+		stack = stack->next;
+		i++;
+	}
+	return (i);
 }
 
-void	find_index(t_node *a)
+int	*clone_stack(t_link *a)
 {
-	t_node	**c;
+	t_link	*alt_stack;
+	int		i;
+	int		*values;
+
+	alt_stack = a;
+	values = malloc(stack_len(a) * sizeof(int));
+	if (!values)
+		return (NULL);
+	while ()
+	{
+		values[i++] = alt_stack->nbr;
+	}
+	return (values);
+}
+
+void	find_index(t_link *a)
+{
+	int	*c;
 
 	c = NULL;
 	c = clone_stack(a);
@@ -77,7 +106,7 @@ void	find_index(t_node *a)
 	
 }
 
-void	ft_error()
+void	ft_error(t_link **stack, int flag)
 {
 	write(STDERR_FILENO, "Error\n", 6);
 	/* 
@@ -87,7 +116,51 @@ void	ft_error()
 	exit(EXIT_FAILURE);
 }
 
-void	init_stack(t_node **stack, char **argv, int flag)
+void	init_link(t_link *stack, int nbr)
+{
+	t_link	*new_node;
+
+	new_node = (t_link *)malloc(sizeof(t_link));
+	if (!new_node)
+		ft_error();
+	new_node->nbr = nbr;
+	new_node->prev = stack;
+	new_node->next = NULL;
+	new_node->index = 0;
+}
+
+int	is_syntax_error(char *str)
+{
+	int	i;
+
+	i = 0;
+	if (!(str[i] == '+' || str[i] == '-' || (str[i] >= '0' && str[i] <= '9')))
+		return (1);
+	if ((str[i] == '+' || str[i] == '-') && !(str[i + 1] >= '0' && str[i + 1] <= '9'))
+		return (1);
+	while (str[i])
+	{
+		if (!(str[i] >= '0' && str[i] <= '9'))
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
+int	is_duplicate(t_link *stack, int nbr)
+{
+	if (stack == NULL)
+		return (0);
+	while (stack)
+	{
+		if (stack->nbr == nbr)
+			return (1);
+		stack = stack->next;
+	}
+	return (0);
+}
+
+void	init_stack(t_link **stack, char **argv, int flag)
 {
 	int		i;
 	long	nbr;
@@ -97,13 +170,13 @@ void	init_stack(t_node **stack, char **argv, int flag)
 	while (argv[i])
 	{
 		if (is_syntax_error(argv[i]))
-			ft_error();
-		if (is_duplicate(argv[i]))
-			ft_error();
+			ft_error(stack, argv, flag);
 		nbr = ft_atol(argv[i]);
 		if (nbr > INT_MAX || nbr < INT_MIN)
-			ft_error();
-		init_node();
+			ft_error(stack, argv, flag);
+		if (is_duplicate(stack, (int)nbr))
+			ft_error(stack, argv, flag);
+		init_link(stack, (int)nbr);
 		i++;
 	}
 	if (flag)
@@ -112,8 +185,8 @@ void	init_stack(t_node **stack, char **argv, int flag)
 
 int	main(int argc, char **argv)
 {
-	t_node	**a;
-	t_node	**b;
+	t_link	*a;
+	t_link	*b;
 	int		flag;
 
 	a = NULL;
