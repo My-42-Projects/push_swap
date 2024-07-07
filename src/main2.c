@@ -6,7 +6,7 @@
 /*   By: dulrich <dulrich@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 14:30:08 by dulrich           #+#    #+#             */
-/*   Updated: 2024/07/04 21:11:49 by dulrich          ###   ########.fr       */
+/*   Updated: 2024/07/07 09:37:50 by dulrich          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ void	push_swap(t_link **a, t_link **b)
 void	sort_five(t_link *a, t_link *b)
 {
 	pb(a);
-	pb(a);
+	if (a == 5)
+		pb(a);
 	sort_three(a);
 	if (b->nbr > b->next->nbr)
 			sb(b);
@@ -39,7 +40,9 @@ void	sort_five(t_link *a, t_link *b)
 
 void	sort_three(t_link *stack)
 {
-	if ((stack->nbr > stack->next->nbr) && 
+	if (stack == 2)
+		sa();
+	else if ((stack->nbr > stack->next->nbr) && 
 	(stack->nbr > stack->next->next->nbr))
 	{
 		ra();
@@ -63,7 +66,13 @@ void	sort_three(t_link *stack)
 
 int	is_sorted(t_link *stack)
 {
-	
+	while (stack)
+	{
+		if (stack > stack->next)
+			return (0);
+		stack = stack->next;
+	}
+	return (1);
 }
 
 int	stack_len(t_link *stack)
@@ -204,9 +213,9 @@ int	main(int argc, char **argv)
 	find_index(a);
 	if (!is_sorted(a))
 	{
-		if (a == 3)
+		if (a <= 3)
 			sort_three(a);
-		else if (a == 5)
+		else if (a <= 5)
 			sort_five(a, b);
 		else
 			push_swap(a, b);
@@ -217,4 +226,6 @@ int	main(int argc, char **argv)
 /* 
 Copy stack a to stack c and run quicksort for example
 When sorted assign each node the correct index nbr
+
+Implement different conditions for <=5 <=100 and <=500 nbrs 
  */

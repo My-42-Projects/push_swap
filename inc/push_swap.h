@@ -6,7 +6,7 @@
 /*   By: dulrich <dulrich@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 14:30:44 by dulrich           #+#    #+#             */
-/*   Updated: 2024/07/04 21:00:15 by dulrich          ###   ########.fr       */
+/*   Updated: 2024/07/07 09:40:49 by dulrich          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@
 
 typedef struct s_link
 {
-	struct s_node	*next;
-	struct s_node	*prev;
+	struct s_link	*next;
+	struct s_link	*prev;
 	int				nbr;
 	int				index;
 	
