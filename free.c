@@ -6,7 +6,7 @@
 /*   By: dulrich <dulrich@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 15:23:37 by dulrich           #+#    #+#             */
-/*   Updated: 2024/07/01 15:26:08 by dulrich          ###   ########.fr       */
+/*   Updated: 2024/07/08 21:02:16 by dulrich          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,4 +23,14 @@ void	free_artificial_argv(char **argv)
 		i++;
 	}
 	free(argv);
+}
+
+void	free_links(t_link *stack)
+{
+	while (stack)
+	{
+		free(stack);
+		stack = stack->next;
+	}
+	free(stack);
 }
