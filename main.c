@@ -6,7 +6,7 @@
 /*   By: dulrich <dulrich@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 09:38:37 by dulrich           #+#    #+#             */
-/*   Updated: 2024/07/08 21:18:45 by dulrich          ###   ########.fr       */
+/*   Updated: 2024/07/09 07:49:36 by dulrich          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,19 @@ void	push_swap(t_link **a, t_link **b)
 		sort_500(a, b);
 }
 
-void	sort_100(t_link *a, t_link *b)
+void	sort_100(t_link **a, t_link **b)
 {
-	int	;
+	int	chunk;
+	int	stack_len_a;
 
-	= 0;
-	while (a)
+	chunk = 1;
+	stack_len_a = stack_len(a);
+	while (stack_len_a)
 	{
-		find_min_values(a, b);
-		
+		find_min_values(a, b, chunk);
+		if (chunk_is_done(a))
+			chunk++;
+		stack_len_a--;
 	}
 }
 
@@ -223,13 +227,36 @@ void	init_stack(t_link **stack, char **argv, int flag)
 		free_artificial_argv(argv);
 }
 
-int	find_min_values(t_link **a, t_link **b)
+void	push_cheapest(t_link **a, t_link **b)
 {
-	/* 
-	Search from the top for smallest value of current chunk
-	Then do the same from the bottom
-	Compare the nbr of moves needed and push the one with fewer moves to b
-	 */
+	
+}
+
+int	find_min_values(t_link **a, t_link **b, int chunk)
+{
+	int	least_moves1;
+	int	least_moves2;
+	int	to_push;
+	t_link	*cheapest_node;
+	
+	least_moves1 = 0;
+	least_moves2 = 0;
+	while (*a)
+	{
+		if ((*a)->chunk == chunk)
+			least_moves1 = find_moves_to_push(a);
+		if (least_moves1)
+		{
+			navigate_to_last_link(a);
+			if ((*a)->chunk == chunk)
+			{
+				least_moves2 = find_moves_to_push(a);
+				if (least_moves2 < least_moves1)
+					least_moves = 
+			}
+		}
+		a = a->next;
+	}
 	push_cheapest(a, b);
 }
 
