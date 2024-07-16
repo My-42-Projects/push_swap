@@ -6,7 +6,7 @@
 /*   By: dulrich <dulrich@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 09:38:37 by dulrich           #+#    #+#             */
-/*   Updated: 2024/07/16 08:08:43 by dulrich          ###   ########.fr       */
+/*   Updated: 2024/07/16 21:26:38 by dulrich          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,17 @@ int	chunk_is_done(t_link **head, int chunk)
 
 void	sort_b(t_link **stack)
 {
-	if (!(*stack))
+	if (!(*stack) || !(*stack)->next)
 		return ;
-	while (*stack)
+	while (TRUE)
 	{
-		if ((*stack)->next && ((*stack)->nbr < (*stack)->next->nbr))
-			
+		if ((*stack)->next && ((*stack)->index < (*stack)->next->index))
+		{
+			calc_moves_to_rotate();
+			#rotate or reverse rotate b;
+		}
+		if (is_sorted(stack))
+			break ;
 	}
 }
 
@@ -60,8 +65,8 @@ void	sort_100(t_link **a, t_link **b)
 	stack_len_a = stack_len(a);
 	while (stack_len_a)
 	{
-		get_cheapest_link(a, b, chunk);
 		sort_b(b);
+		get_cheapest_link(a, b, chunk);
 		if (chunk_is_done(a, chunk))
 			chunk++;
 		stack_len_a--;
@@ -257,20 +262,35 @@ t_link	*calc_moves_to_push(t_link **stack, t_link *link, int flag)
 		return (find_second_match(stack, link));
 }
 
+void	choose_insert(t_link **stack)
+{
+	if (!(*stack) || !(*stack)->next)
+		return ;
+	while (TRUE)´
+	{
+		if ((*stack)->next && ((*stack)->index < (*stack)->next->index))
+		{
+			calc_moves_to_rotate();
+			#rotate or reverse rotate b;
+		}
+		if (is_sorted(stack))
+			break ;
+	}
+}
+
 void	push_cheapest(t_link **a, t_link **b, t_link *first_node, t_link *second_node)
 {
 	if (compare_moves(first_node, second_node))
 	{
-		while (first_node != #first position)
+		while (first_node != *a)
 			ra();
-		while (first_node->nbr > )
 	}
 	else
 	{
-		while (second_node != #first position)
+		while (second_node != *a)
 			rra();
 	}
-	
+	choose_insert(b);
 	pb(a, b);
 }
 
@@ -301,6 +321,17 @@ void	get_cheapest_link(t_link **a, t_link **b, int chunk)
 		*a = (*a)->next;
 	}
 	push_cheapest(a, b, cheapest_link1, cheapest_link2);
+}
+
+int	is_sorted(t_link **a)
+{
+	while(*a)
+	{
+		if ((*a)->nbr > (*a)->next->nbr)
+			return (0);
+		*a = (*a)->next;
+	}
+	return (1);
 }
 
 int	main(int argc, char **argv)

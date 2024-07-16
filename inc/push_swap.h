@@ -6,7 +6,7 @@
 /*   By: dulrich <dulrich@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 14:30:44 by dulrich           #+#    #+#             */
-/*   Updated: 2024/07/11 16:50:26 by dulrich          ###   ########.fr       */
+/*   Updated: 2024/07/16 18:53:37 by dulrich          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,9 @@
 # include <unistd.h>
 # include <limits.h>
 # include "../libft/libft.h"
+
+# define TRUE 1
+# define FALSE 0
 
 typedef struct s_link
 {
