@@ -6,7 +6,7 @@
 /*   By: dulrich <dulrich@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 21:56:25 by dulrich           #+#    #+#             */
-/*   Updated: 2024/07/11 22:03:38 by dulrich          ###   ########.fr       */
+/*   Updated: 2024/07/14 08:14:42 by dulrich          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ void	rotate()
 	
 }
 
-void	ra()
+void	ra(t_link **a)
 {
-	rotate();
+	rotate(a);
 	write(1, "ra\n", 3);
 }

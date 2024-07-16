@@ -6,7 +6,7 @@
 /*   By: dulrich <dulrich@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 09:38:37 by dulrich           #+#    #+#             */
-/*   Updated: 2024/07/13 11:46:52 by dulrich          ###   ########.fr       */
+/*   Updated: 2024/07/16 08:08:43 by dulrich          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,17 @@ int	chunk_is_done(t_link **head, int chunk)
 	return (1);
 }
 
+void	sort_b(t_link **stack)
+{
+	if (!(*stack))
+		return ;
+	while (*stack)
+	{
+		if ((*stack)->next && ((*stack)->nbr < (*stack)->next->nbr))
+			
+	}
+}
+
 void	sort_100(t_link **a, t_link **b)
 {
 	int	chunk;
@@ -50,6 +61,7 @@ void	sort_100(t_link **a, t_link **b)
 	while (stack_len_a)
 	{
 		get_cheapest_link(a, b, chunk);
+		sort_b(b);
 		if (chunk_is_done(a, chunk))
 			chunk++;
 		stack_len_a--;
@@ -239,46 +251,48 @@ t_link	*find_second_match(t_link **stack, t_link *link)
 
 t_link	*calc_moves_to_push(t_link **stack, t_link *link, int flag)
 {
-	int	rrr;
-	t_link	*first_link;
-	t_link	*last_link;
-
 	if (flag)
-		return(first_link = find_first_match(stack, link));
+		return(find_first_match(stack, link));
 	else
-	{
-		last_link = find_second_match(stack, link);
-		if (compare_moves(link, last_link))
-			return (link);
-		else
-			return (last_link);
-	}
+		return (find_second_match(stack, link));
 }
 
-void	push_cheapest(t_link **a, t_link **b, t_link *cheapest_node)
+void	push_cheapest(t_link **a, t_link **b, t_link *first_node, t_link *second_node)
 {
+	if (compare_moves(first_node, second_node))
+	{
+		while (first_node != #first position)
+			ra();
+		while (first_node->nbr > )
+	}
+	else
+	{
+		while (second_node != #first position)
+			rra();
+	}
 	
+	pb(a, b);
 }
 
 void	get_cheapest_link(t_link **a, t_link **b, int chunk)
 {
-	t_link	*cheapest_node;
-	t_link	*cheapest_node2;
+	t_link	*cheapest_link1;
+	t_link	*cheapest_link2;
 
-	cheapest_node = NULL;
-	cheapest_node2 = NULL;
+	cheapest_link1 = NULL;
+	cheapest_link2 = NULL;
 	while (*a)
 	{
 		if ((*a)->chunk == chunk)
-			cheapest_node = calc_moves_to_push(a, *a, 1);
-		if (cheapest_node)
+			cheapest_link1 = calc_moves_to_push(a, *a, 1);
+		if (cheapest_link1)
 		{
 			navigate_to_last_link(a);
-			while (*a != cheapest_node)
+			while (*a != cheapest_link1)
 			{
 				if ((*a)->chunk == chunk)
 				{
-					cheapest_node2 = calc_moves_to_push(a, *a, 0);
+					cheapest_link2 = calc_moves_to_push(a, *a, 0);
 					break ;
 				}
 				*a = (*a)->prev;
@@ -286,7 +300,7 @@ void	get_cheapest_link(t_link **a, t_link **b, int chunk)
 		}
 		*a = (*a)->next;
 	}
-	push_cheapest(a, b, cheapest_node);
+	push_cheapest(a, b, cheapest_link1, cheapest_link2);
 }
 
 int	main(int argc, char **argv)

@@ -6,7 +6,7 @@
 /*   By: dulrich <dulrich@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 07:54:36 by dulrich           #+#    #+#             */
-/*   Updated: 2024/07/09 08:19:50 by dulrich          ###   ########.fr       */
+/*   Updated: 2024/07/14 08:10:04 by dulrich          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,13 @@ void	push(t_link **dest, t_link **src)
 	}
 }
 
-void	pa(t_link **b, t_link **a)
+void	pa(t_link **a, t_link **b)
 {
 	push(a, b);
 	write(1, "pa\n", 3);
 }
 
-void	pb(t_link **b, t_link **a)
+void	pb(t_link **a, t_link **b)
 {
 	push(b, a);
 	write(1, "pb\n", 3);
