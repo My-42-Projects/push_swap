@@ -6,7 +6,7 @@
 /*   By: dulrich <dulrich@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 13:42:35 by dulrich           #+#    #+#             */
-/*   Updated: 2024/07/11 19:16:36 by dulrich          ###   ########.fr       */
+/*   Updated: 2024/07/18 10:06:13 by dulrich          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,15 +36,37 @@ long	ft_atol(char *str)
 	return (nbr * sign);
 }
 
-int	stack_len(t_link *stack)
+int	stack_len(t_link **stack)
 {
 	int	i;
 
 	i = 0;
-	while (stack)
+	if (stack == NULL)
+		return (0);
+	while (*stack)
 	{
-		stack = stack->next;
+		*stack = (*stack)->next;
 		i++;
 	}
 	return (i);
+}
+
+t_link	*clone_stack(t_link **a, t_link **c)
+{
+	int		i;
+	int		*values;
+
+	while (*a)
+	{
+		init_link(c, (*a)->nbr);
+		*a = (*a)->next;
+	}
+	return (c);
+}
+
+t_link	*get_last_link(t_link **head)
+{
+	while (*head)
+		*head = (*head)->next;
+	return (*head);
 }
