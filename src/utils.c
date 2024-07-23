@@ -6,7 +6,7 @@
 /*   By: dulrich <dulrich@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 13:42:35 by dulrich           #+#    #+#             */
-/*   Updated: 2024/07/18 10:06:13 by dulrich          ###   ########.fr       */
+/*   Updated: 2024/07/19 09:47:34 by dulrich          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,35 +38,53 @@ long	ft_atol(char *str)
 
 int	stack_len(t_link **stack)
 {
-	int	i;
+	int	len;
 
-	i = 0;
-	if (stack == NULL)
+	len = 0;
+	if (stack == NULL || *stack == NULL)
 		return (0);
 	while (*stack)
 	{
 		*stack = (*stack)->next;
-		i++;
+		len++;
 	}
-	return (i);
+	return (len);
 }
 
-t_link	*clone_stack(t_link **a, t_link **c)
+void	allocate_chunks(t_link **stack, int	*nbrs)
 {
-	int		i;
-	int		*values;
+	int	i;
+	int	chunk;
 
-	while (*a)
+	if (*stack == NULL)
+		return ;
+	i = 0;
+	chunk = 1;
+	while (nbrs[i])
 	{
-		init_link(c, (*a)->nbr);
-		*a = (*a)->next;
+		if (nbrs[i] == (*stack)->nbr)
+		{
+			(*stack)->index = i;
+			(*stack)->chunk = chunk;
+			i++;
+		}
+		else
+			*stack = (*stack)->next;
+		if (*stack == NULL)
+			*stack = get_first_link(stack);
 	}
-	return (c);
+}
+
+t_link	*get_first_link(t_link **head)
+{
+	while ((*head)->prev)
+		*head = (*head)->prev;
+	return (*head);
 }
 
 t_link	*get_last_link(t_link **head)
 {
-	while (*head)
+	while ((*head)->next)
 		*head = (*head)->next;
 	return (*head);
 }
