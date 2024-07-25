@@ -6,7 +6,7 @@
 /*   By: dulrich <dulrich@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 09:38:37 by dulrich           #+#    #+#             */
-/*   Updated: 2024/07/18 22:28:31 by dulrich          ###   ########.fr       */
+/*   Updated: 2024/07/25 13:51:56 by dulrich          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,20 +67,25 @@ void	init_stack(t_link **stack, char **argv, int flag)
 		free_artificial_argv(argv);
 }
 
-/* int	calc_moves_to_rotate(t_link **stack, int index)
+char	*determine_rotation(t_link **stack, t_link *link)
 {
-	int	i;
+	int	rot;
 	int	mid;
 
 	mid = stack_len(stack) / 2;
-	i = 0;
+	rot = 0;
 	while (*stack)
 	{
-		
+		if (*stack == link)
+			break ;
+		rot++;
 	}
-	return ();
+	if (rot <= mid)
+		return ("rr");
+	else
+		return ("rrr");
 }
-
+/*
 to make it more efficient I need to determine if I should rotate or rev rot
 void	choose_insert(t_link **stack, int index)
 {
@@ -119,7 +124,7 @@ int	main(int argc, char **argv)
 	}
 	init_stack(a, argv, flag);
 	find_index(a);
-	if (!is_sorted(a))
+	if (!is_sorted(a, FALSE))
 		push_swap(a, b);
 	return (0);
 }

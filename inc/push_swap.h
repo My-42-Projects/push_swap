@@ -6,7 +6,7 @@
 /*   By: dulrich <dulrich@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 14:30:44 by dulrich           #+#    #+#             */
-/*   Updated: 2024/07/18 10:14:47 by dulrich          ###   ########.fr       */
+/*   Updated: 2024/07/25 13:08:50 by dulrich          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	free_links(t_link **stack);
 void	free_artificial_argv(char **argv);
 
 //checks.c
-int		is_sorted(t_link *stack);
+int		is_sorted(t_link *stack, int reverse);
 int		is_duplicate(t_link *stack, int nbr);
 int		is_syntax_error(char *str);
 

@@ -6,7 +6,7 @@
 /*   By: dulrich <dulrich@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 09:54:46 by dulrich           #+#    #+#             */
-/*   Updated: 2024/07/18 09:59:31 by dulrich          ###   ########.fr       */
+/*   Updated: 2024/07/25 13:14:07 by dulrich          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,36 +14,41 @@
 
 void	push_swap(t_link **a, t_link **b)
 {
-	if (stack_len(a) <= 3)
+	int	stack_len;
+
+	stack_len = stack_len(a);
+	if (stack_len <= 3)
 		sort_three(a);
-	else if (stack_len(a) <= 5)
+	else if (stack_len <= 5)
 		sort_five(a, b);
-	else if (stack_len(a) <= 100)
-		sort_all(a, b, 100);
 	else
-		sort_all(a, b, 500);
+		sort_all(a, b, stack_len);
 }
 
 void	sort_all(t_link **a, t_link **b, int amount)
 {
 	int	chunk;
 	int	max_chunk;
-	int	stack_len_a;
 
-	if (amount == 100)
+	if (amount <= 100)
 		max_chunk = 5;
 	else
 		max_chunk = 11;
-	chunk = 1;
-	stack_len_a = stack_len(a);
-	while (stack_len_a && chunk <= max_chunk)
+	chunk = 0;
+	while (stack_len(a))
 	{
 		sort_b(b);
 		get_cheapest_link(a, b, chunk);
-		if (chunk_is_done(a, chunk))
-			chunk++;
-		stack_len_a--;
+		if (chunk != max_chunk)
+		{
+			if (chunk_is_done(a, chunk))
+				chunk++;
+		}
 	}
+	if (!is_sorted(b, TRUE))
+		last_rotation(b); //implement this
+	while (stack_len(b)) //implement this
+		pa(a, b);
 }
 
 void	sort_five(t_link *a, t_link *b)

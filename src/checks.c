@@ -6,7 +6,7 @@
 /*   By: dulrich <dulrich@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 19:12:39 by dulrich           #+#    #+#             */
-/*   Updated: 2024/07/18 10:06:31 by dulrich          ###   ########.fr       */
+/*   Updated: 2024/07/25 13:20:23 by dulrich          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,25 @@ int	is_duplicate(t_link *stack, int nbr)
 	return (0);
 }
 
-int	is_sorted(t_link *stack)
+int	is_sorted(t_link *stack, int reverse)
 {
-	while (stack)
+	if (reverse)
 	{
-		if (stack->nbr > stack->next->nbr)
-			return (0);
-		stack = stack->next;
+		stack = get_last_link(stack);
+		while (stack->prev)
+		{
+			if (stack->nbr < stack->next->nbr)
+				return (0);
+			stack = stack->next;
+		}
+		return (1);
 	}
-	return (1);
+	else
+		while (stack)
+		{
+			if (stack->nbr > stack->next->nbr)
+				return (0);
+			stack = stack->next;
+		}
+		return (1);
 }
