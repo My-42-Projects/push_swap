@@ -6,7 +6,7 @@
 /*   By: dulrich <dulrich@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 13:42:35 by dulrich           #+#    #+#             */
-/*   Updated: 2024/07/25 12:37:19 by dulrich          ###   ########.fr       */
+/*   Updated: 2024/07/25 21:20:22 by dulrich          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,6 @@ void	allocate_chunks(t_link **stack, int	*nbrs, int max_chunk, int	nbrs_per_chun
 	int	j;
 	int	chunk;
 
-	if (*stack == NULL)
-		return ;
 	i = 0;
 	j = 0;
 	chunk = 0;

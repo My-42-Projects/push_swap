@@ -6,7 +6,7 @@
 /*   By: dulrich <dulrich@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 09:50:33 by dulrich           #+#    #+#             */
-/*   Updated: 2024/07/18 10:12:55 by dulrich          ###   ########.fr       */
+/*   Updated: 2024/07/26 11:27:36 by dulrich          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,22 +25,47 @@ void	choose_insert(t_link **stack, int index)
 		rb();
 }
 
-void	push_cheapest(t_link **a, t_link **b, t_link *first_node, t_link *second_node)
+void	calc_moves_to_rotate(t_link **stack)
+{
+	
+}
+
+void	choose_insertion(t_link **stack, int index)
+{
+	t_link	*last;
+
+	if (!(*stack) || !(*stack)->next)
+		return ;
+	last = get_last_link(stack);
+	if (calc_moves_to_rotate()) //need to implement
+		//rotate b;
+	else
+		//rev rot b;
+	while (TRUE)
+	{
+		
+		if ((*stack)->next && (((*stack)->index < index)) && (last->index > index))
+			break ;
+	}
+	
+}
+
+void	push_cheapest(t_link **a, t_link **b, t_link *first_link, t_link *second_link)
 {
 	int	push_first;
 
-	push_first = compare_moves(first_node, second_node);
+	push_first = compare_moves(first_link, second_link);
 	if (push_first)
 	{
-		while (first_node != *a)
-			ra();
-		choose_insert(b, first_node->index);
+		while (first_link != *a)
+			ra(a);
+		choose_insertion(b, first_link->index);
 	}
 	else
 	{
-		while (second_node != *a)
-			rra();
-		choose_insert(b, second_node->index);
+		while (second_link != *a)
+			rra(a);
+		choose_insertion(b, second_link->index);
 	}
 	pb(a, b);
 }

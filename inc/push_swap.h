@@ -6,7 +6,7 @@
 /*   By: dulrich <dulrich@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 14:30:44 by dulrich           #+#    #+#             */
-/*   Updated: 2024/07/25 13:08:50 by dulrich          ###   ########.fr       */
+/*   Updated: 2024/07/25 21:31:32 by dulrich          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ typedef struct s_link
 	int				nbr;
 	int				index;
 	int				chunk;
-	int				moves_to_push;
 	int				rr;
 	int				rrr;
 } t_link;
