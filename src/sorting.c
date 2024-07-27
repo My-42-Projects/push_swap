@@ -6,45 +6,30 @@
 /*   By: dulrich <dulrich@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 09:50:33 by dulrich           #+#    #+#             */
-/*   Updated: 2024/07/26 11:27:36 by dulrich          ###   ########.fr       */
+/*   Updated: 2024/07/27 21:51:05 by dulrich          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/push_swap.h"
 
-void	choose_insert(t_link **stack, int index)
-{
-	t_link	*right_spot;
-
-	if (!(*stack) || !(*stack)->next)
-		return ;
-	right_spot = find_right_spot(stack, index, 0);
-	if (!right_spot)
-		return ;
-	while (*stack != right_spot)
-		rb();
-}
-
-void	calc_moves_to_rotate(t_link **stack)
-{
-	
-}
-
-void	choose_insertion(t_link **stack, int index)
+void	choose_insertion(t_link **stack, t_link *link)
 {
 	t_link	*last;
+	int		reverse;
 
 	if (!(*stack) || !(*stack)->next)
 		return ;
+	reverse = 0;
 	last = get_last_link(stack);
-	if (calc_moves_to_rotate()) //need to implement
-		//rotate b;
-	else
-		//rev rot b;
+	if (ft_strncmp(determine_rotation(stack, link), "rrr", 3) == 0)
+		reverse = 1;
 	while (TRUE)
 	{
-		
-		if ((*stack)->next && (((*stack)->index < index)) && (last->index > index))
+		if (reverse)
+			rrb(stack);
+		else
+			rb(stack);
+		if ((*stack)->next && (((*stack)->index < link->index)) && (last->index > link->index))
 			break ;
 	}
 	
@@ -59,13 +44,13 @@ void	push_cheapest(t_link **a, t_link **b, t_link *first_link, t_link *second_li
 	{
 		while (first_link != *a)
 			ra(a);
-		choose_insertion(b, first_link->index);
+		choose_insertion(b, first_link);
 	}
 	else
 	{
 		while (second_link != *a)
 			rra(a);
-		choose_insertion(b, second_link->index);
+		choose_insertion(b, second_link);
 	}
 	pb(a, b);
 }
@@ -83,7 +68,7 @@ void	get_cheapest_link(t_link **a, t_link **b, int chunk)
 			cheapest_link1 = calc_moves_to_push(a, *a, 1);
 		if (cheapest_link1)
 		{
-			find_last_link(a);
+			get_last_link(a);
 			while (*a != cheapest_link1)
 			{
 				if ((*a)->chunk == chunk)

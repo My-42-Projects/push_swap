@@ -6,7 +6,7 @@
 /*   By: dulrich <dulrich@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 09:54:46 by dulrich           #+#    #+#             */
-/*   Updated: 2024/07/25 21:34:06 by dulrich          ###   ########.fr       */
+/*   Updated: 2024/07/27 21:35:52 by dulrich          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,51 +44,51 @@ void	sort_all(t_link **a, t_link **b, int amount)
 				chunk++;
 		}
 	}
-	if (!is_sorted(b, TRUE))
+	if (!is_sorted(*b, TRUE))
 		last_rotation(b);
 	while (stack_len(b))
 		pa(a, b);
 }
 
-void	sort_five(t_link *a, t_link *b)
+void	sort_five(t_link **a, t_link **b)
 {
-	pb(a);
+	pb(a, b);
 	if (stack_len(a) == 5)
-		pb(a);
+		pb(a, b);
 	sort_three(a);
-	if (b->nbr > b->next->nbr)
+	if ((*b)->nbr > (*b)->next->nbr)
 			sb(b);
 	while (b)
 	{
-		while (b->nbr > a->nbr && b->nbr < a->next->nbr)
+		while ((*b)->nbr > (*a)->nbr && (*b)->nbr < (*a)->next->nbr)
 			ra(a);
-		pa(b);
-		b = b->next;
+		pa(a, b);
+		*b = (*b)->next;
 	}
 }
 
-void	sort_three(t_link *stack)
+void	sort_three(t_link **stack)
 {
 	if (stack_len(stack) == 2)
-		sa();
-	else if ((stack->nbr > stack->next->nbr) && 
-	(stack->nbr > stack->next->next->nbr))
+		sa(stack);
+	else if (((*stack)->nbr > (*stack)->next->nbr) && 
+	((*stack)->nbr > (*stack)->next->next->nbr))
 	{
-		ra();
-		if (stack->next->nbr > stack->next->next->nbr)
-			sa();
+		ra(stack);
+		if ((*stack)->next->nbr > (*stack)->next->next->nbr)
+			sa(stack);
 	}
-	else if ((stack->next->nbr > stack->nbr) && 
-	(stack->next->nbr > stack->nbr))
+	else if (((*stack)->next->nbr > (*stack)->nbr) && 
+	((*stack)->next->nbr > (*stack)->nbr))
 	{
-		rra();
-		if (stack->next->next->nbr > stack->nbr)
-			sa();
+		rra(stack);
+		if ((*stack)->next->next->nbr > (*stack)->nbr)
+			sa(stack);
 	}
-	else if ((stack->next->next->nbr > stack->nbr) &&
-			(stack->next->next->nbr > stack->next->nbr))
+	else if (((*stack)->next->next->nbr > (*stack)->nbr) &&
+			((*stack)->next->next->nbr > (*stack)->next->nbr))
 	{
-		if (stack->nbr > stack->next->nbr)
-			sa();
+		if ((*stack)->nbr > (*stack)->next->nbr)
+			sa(stack);
 	}
 }

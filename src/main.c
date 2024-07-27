@@ -6,7 +6,7 @@
 /*   By: dulrich <dulrich@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 09:38:37 by dulrich           #+#    #+#             */
-/*   Updated: 2024/07/25 21:36:49 by dulrich          ###   ########.fr       */
+/*   Updated: 2024/07/27 21:16:17 by dulrich          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	init_link(t_link *stack, int nbr, char **argv, int flag)
 
 	new_link = (t_link *)malloc(sizeof(t_link));
 	if (!new_link)
-		ft_error(stack, argv, flag);
+		ft_error(&stack, argv, flag);
 	new_link->nbr = nbr;
 	new_link->prev = stack;
 	new_link->next = NULL;
@@ -42,9 +42,9 @@ void	init_stack(t_link **stack, char **argv, int flag)
 		nbr = ft_atol(argv[i]);
 		if (nbr > INT_MAX || nbr < INT_MIN)
 			ft_error(stack, argv, flag);
-		if (is_duplicate(stack, (int)nbr))
+		if (is_duplicate(*stack, (int)nbr))
 			ft_error(stack, argv, flag);
-		init_link(stack, (int)nbr, argv, flag);
+		init_link(*stack, (int)nbr, argv, flag);
 		i++;
 	}
 	if (flag)
@@ -68,20 +68,9 @@ int	main(int argc, char **argv)
 			exit (EXIT_FAILURE);
 		flag = 1;
 	}
-	init_stack(a, argv, flag);
+	init_stack(&a, argv, flag);
 	find_index(a);
 	if (!is_sorted(a, FALSE))
-		push_swap(a, b);
+		push_swap(&a, &b);
 	return (0);
 }
-
-/* 
-Copy stack a to stack c and run quicksort for example
-When sorted assign each node the correct index nbr
-
-Idea: To push everything to b in more or less ascending order
-Implement different conditions for <=5 <=100 (5 chunks) and <=500 nbrs (11 chunks)
-Find out which values belong in which chunks --> run search algorith over it and index the nodes
-Go through the chunks and find the first two corresponding values
-Compare, which needs fewer moves and push to b
- */

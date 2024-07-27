@@ -6,7 +6,7 @@
 /*   By: dulrich <dulrich@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 09:51:15 by dulrich           #+#    #+#             */
-/*   Updated: 2024/07/25 12:20:47 by dulrich          ###   ########.fr       */
+/*   Updated: 2024/07/27 21:45:04 by dulrich          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,14 +60,18 @@ int	*get_ints(t_link *stack)
 {
 	int	*nbrs;
 	int	i;
+	int	len;
 
+	len = stack_len(&stack);
+	nbrs = (int *)malloc(len * sizeof(int));
+	if (!nbrs)
+		ps_error(&stack);
 	i = 0;
 	while (stack)
 	{
 		nbrs[i++] = stack->nbr;
 		stack = stack->next;
 	}
-	nbrs[i] = NULL;
 	return (nbrs);
 }
 
@@ -77,19 +81,17 @@ void	find_index(t_link *a)
 	int	*sorted;
 	int	len;
 
-	len = stack_len(a);
-	unsorted = (int *)malloc((len + 1) * sizeof(int));
-	if (!unsorted)
-		ft_error();
+	len = stack_len(&a);
+	unsorted = NULL;
 	unsorted = get_ints(a);
-	sorted = (int *)malloc((len + 1) * sizeof(int));
+	sorted = (int *)malloc(len * sizeof(int));
 	if (!sorted)
-		ft_error();
+		ps_error(&a);
 	sorted = quicksort(unsorted, 0, len);
 	free(unsorted);
 	if (len <= 100)
-		allocate_chunks(a, sorted, 5, len / 5);
+		allocate_chunks(&a, sorted, 5, len / 5);
 	else
-		allocate_chunks(a, sorted, 11, len / 11);
+		allocate_chunks(&a, sorted, 11, len / 11);
 	free(sorted);
 }
