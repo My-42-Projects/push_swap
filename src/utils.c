@@ -6,7 +6,7 @@
 /*   By: dulrich <dulrich@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 13:42:35 by dulrich           #+#    #+#             */
-/*   Updated: 2024/07/27 21:17:55 by dulrich          ###   ########.fr       */
+/*   Updated: 2024/07/28 21:13:41 by dulrich          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,16 +52,18 @@ int	stack_len(t_link **stack)
 	return (len);
 }
 
-void	allocate_chunks(t_link **stack, int	*nbrs, int max_chunk, int	nbrs_per_chunk)
+void	allocate_chunks(t_link **stack, int	*nbrs, int max_chunk, int nbrs_per_chunk)
 {
 	int	i;
 	int	j;
+	int	len;
 	int	chunk;
 
 	i = 0;
 	j = 0;
 	chunk = 0;
-	while (nbrs[i])
+	len = stack_len(stack);
+	while (i < len)
 	{
 		if (nbrs[i] == (*stack)->nbr)
 		{

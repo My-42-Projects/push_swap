@@ -3,7 +3,6 @@ NAME = push_swap
 CC = cc
 CFLAGS = -g -Wall -Wextra -Werror
 
-
 LIBFT_DIR = libft
 SRC_DIR	= src
 OBJ_DIR	= obj

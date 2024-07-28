@@ -6,7 +6,7 @@
 /*   By: dulrich <dulrich@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 12:26:31 by dulrich           #+#    #+#             */
-/*   Updated: 2023/09/19 11:28:20 by dulrich          ###   ########.fr       */
+/*   Updated: 2024/07/28 21:58:11 by dulrich          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,8 @@ static int	ft_count(const char *s, int c)
 		else
 			i++;
 	}
+	if (num_of_str < 2)
+		exit (0);
 	return (num_of_str);
 }
 
