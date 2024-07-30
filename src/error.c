@@ -6,7 +6,7 @@
 /*   By: dulrich <dulrich@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 09:53:35 by dulrich           #+#    #+#             */
-/*   Updated: 2024/07/26 20:23:01 by dulrich          ###   ########.fr       */
+/*   Updated: 2024/07/30 07:54:37 by dulrich          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	ft_error(t_link **stack, char **argv, int flag)
 {
 	write(STDERR_FILENO, "Error\n", 6);
-	free_links(stack);
+	free_links(*stack);
 	if (flag)
 		free_artificial_argv(argv);
 	exit(EXIT_FAILURE);
@@ -24,6 +24,6 @@ void	ft_error(t_link **stack, char **argv, int flag)
 void	ps_error(t_link **stack)
 {
 	write(STDERR_FILENO, "Error\n", 6);
-	free_links(stack);
+	free_links(*stack);
 	exit(EXIT_FAILURE);
 }

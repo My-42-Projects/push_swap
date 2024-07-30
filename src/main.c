@@ -6,7 +6,7 @@
 /*   By: dulrich <dulrich@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 09:38:37 by dulrich           #+#    #+#             */
-/*   Updated: 2024/07/28 21:58:56 by dulrich          ###   ########.fr       */
+/*   Updated: 2024/07/30 07:53:06 by dulrich          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,21 @@ void	init_stack(t_link **stack, char **argv, int to_free)
 	while (argv[i])
 	{
 		if (is_syntax_error(argv[i]))
+		{
+			printf("syntax");
 			ft_error(stack, argv, to_free);
+		}
 		nbr = ft_atol(argv[i]);
 		if (nbr > INT_MAX || nbr < INT_MIN)
+		{
+			printf("min/max");
 			ft_error(stack, argv, to_free);
+		}
 		if (is_duplicate(stack, (int)nbr))
+		{
+			printf("dup");
 			ft_error(stack, argv, to_free);
+		}
 		init_link(*stack, (int)nbr, argv, to_free);
 		i++;
 	}
@@ -68,8 +77,12 @@ int	main(int argc, char **argv)
 		to_free = TRUE;
 	}
 	init_stack(&a, argv, to_free);
-	find_index(a);
-	if (!is_sorted(a, FALSE))
+	if (is_sorted(a, FALSE))
+		free_links(a);
+	else
+	{
+		find_index(a);
 		push_swap(&a, &b);
+	}
 	return (0);
 }

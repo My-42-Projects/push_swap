@@ -6,7 +6,7 @@
 /*   By: dulrich <dulrich@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 19:12:39 by dulrich           #+#    #+#             */
-/*   Updated: 2024/07/27 21:18:51 by dulrich          ###   ########.fr       */
+/*   Updated: 2024/07/30 07:47:58 by dulrich          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ int	is_sorted(t_link *stack, int reverse)
 		return (1);
 	}
 	else
+	{
 		while (stack)
 		{
 			if (stack->nbr > stack->next->nbr)
@@ -64,4 +65,5 @@ int	is_sorted(t_link *stack, int reverse)
 			stack = stack->next;
 		}
 		return (1);
+	}
 }

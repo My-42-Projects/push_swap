@@ -6,7 +6,7 @@
 /*   By: dulrich <dulrich@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 14:30:44 by dulrich           #+#    #+#             */
-/*   Updated: 2024/07/27 21:36:45 by dulrich          ###   ########.fr       */
+/*   Updated: 2024/07/30 07:53:22 by dulrich          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int		stack_len(t_link **stack);
 long	ft_atol(char *str);
 
 //free.c
-void	free_links(t_link **stack);
+void	free_links(t_link *stack);
 void	free_artificial_argv(char **argv);
 
 //checks.c
