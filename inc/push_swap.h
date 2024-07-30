@@ -6,7 +6,7 @@
 /*   By: dulrich <dulrich@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 14:30:44 by dulrich           #+#    #+#             */
-/*   Updated: 2024/07/30 07:53:22 by dulrich          ###   ########.fr       */
+/*   Updated: 2024/07/30 21:19:32 by dulrich          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,22 +37,22 @@ typedef struct s_link
 //main.c
 int		main(int argc, char **argv);
 void	init_stack(t_link **stack, char **argv, int flag);
-void	init_link(t_link *stack, int nbr, char **argv, int flag);
+void	init_link(t_link **stack, int nbr, char **argv, int flag);
 
 //utils.c
-t_link	*get_last_link(t_link **head);
-t_link	*get_first_link(t_link **head);
+t_link	*get_last_link(t_link *head);
+t_link	*get_first_link(t_link *head);
 void	allocate_chunks(t_link **stack, int	*nbrs, int max_chunk, int	nbrs_per_chunk);
 int		stack_len(t_link **stack);
 long	ft_atol(char *str);
 
 //free.c
-void	free_links(t_link *stack);
+void	free_links(t_link **stack);
 void	free_artificial_argv(char **argv);
 
 //checks.c
 int		is_sorted(t_link *stack, int reverse);
-int		is_duplicate(t_link **stack, int nbr);
+int		is_duplicate(t_link *stack, int nbr);
 int		is_syntax_error(char *str);
 
 //push.c

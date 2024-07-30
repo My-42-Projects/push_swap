@@ -6,7 +6,7 @@
 /*   By: dulrich <dulrich@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 09:50:33 by dulrich           #+#    #+#             */
-/*   Updated: 2024/07/27 21:51:05 by dulrich          ###   ########.fr       */
+/*   Updated: 2024/07/30 21:25:06 by dulrich          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	choose_insertion(t_link **stack, t_link *link)
 	if (!(*stack) || !(*stack)->next)
 		return ;
 	reverse = 0;
-	last = get_last_link(stack);
+	last = get_last_link(*stack);
 	if (ft_strncmp(determine_rotation(stack, link), "rrr", 3) == 0)
 		reverse = 1;
 	while (TRUE)
@@ -68,7 +68,7 @@ void	get_cheapest_link(t_link **a, t_link **b, int chunk)
 			cheapest_link1 = calc_moves_to_push(a, *a, 1);
 		if (cheapest_link1)
 		{
-			get_last_link(a);
+			get_last_link(*a);
 			while (*a != cheapest_link1)
 			{
 				if ((*a)->chunk == chunk)
