@@ -6,7 +6,7 @@
 /*   By: dulrich <dulrich@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 09:54:46 by dulrich           #+#    #+#             */
-/*   Updated: 2024/07/27 21:35:52 by dulrich          ###   ########.fr       */
+/*   Updated: 2024/08/01 13:06:33 by dulrich          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	push_swap(t_link **a, t_link **b)
 {
 	int	len;
 
-	len = stack_len(a);
+	len = stack_len(*a);
 	if (len <= 3)
 		sort_three(a);
 	else if (len <= 5)
@@ -35,7 +35,7 @@ void	sort_all(t_link **a, t_link **b, int amount)
 	else
 		max_chunk = 11;
 	chunk = 0;
-	while (stack_len(a))
+	while (stack_len(*a))
 	{
 		get_cheapest_link(a, b, chunk);
 		if (chunk != max_chunk)
@@ -46,14 +46,14 @@ void	sort_all(t_link **a, t_link **b, int amount)
 	}
 	if (!is_sorted(*b, TRUE))
 		last_rotation(b);
-	while (stack_len(b))
+	while (stack_len(*b))
 		pa(a, b);
 }
 
 void	sort_five(t_link **a, t_link **b)
 {
 	pb(a, b);
-	if (stack_len(a) == 5)
+	if (stack_len(*a) == 4)
 		pb(a, b);
 	sort_three(a);
 	if ((*b)->nbr > (*b)->next->nbr)
@@ -69,7 +69,10 @@ void	sort_five(t_link **a, t_link **b)
 
 void	sort_three(t_link **stack)
 {
-	if (stack_len(stack) == 2)
+	t_link	*last_link;
+
+	last_link = get_last_link(*stack);
+	if (stack_len(*stack) == 2)
 		sa(stack);
 	else if (((*stack)->nbr > (*stack)->next->nbr) && 
 	((*stack)->nbr > (*stack)->next->next->nbr))
@@ -85,8 +88,8 @@ void	sort_three(t_link **stack)
 		if ((*stack)->next->next->nbr > (*stack)->nbr)
 			sa(stack);
 	}
-	else if (((*stack)->next->next->nbr > (*stack)->nbr) &&
-			((*stack)->next->next->nbr > (*stack)->next->nbr))
+	else if ((last_link->nbr > (*stack)->nbr) &&
+			(last_link->nbr > (*stack)->next->nbr))
 	{
 		if ((*stack)->nbr > (*stack)->next->nbr)
 			sa(stack);

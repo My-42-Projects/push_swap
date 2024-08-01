@@ -6,7 +6,7 @@
 /*   By: dulrich <dulrich@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 10:00:14 by dulrich           #+#    #+#             */
-/*   Updated: 2024/07/27 21:47:42 by dulrich          ###   ########.fr       */
+/*   Updated: 2024/07/31 15:11:30 by dulrich          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ char	*determine_rotation(t_link **stack, t_link *link)
 	int	rot;
 	int	mid;
 
-	mid = stack_len(stack) / 2;
+	mid = stack_len(*stack) / 2;
 	rot = 0;
 	while (*stack)
 	{

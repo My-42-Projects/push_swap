@@ -6,7 +6,7 @@
 /*   By: dulrich <dulrich@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 21:56:25 by dulrich           #+#    #+#             */
-/*   Updated: 2024/07/30 21:22:02 by dulrich          ###   ########.fr       */
+/*   Updated: 2024/07/31 15:09:58 by dulrich          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	rotate(t_link **stack, int reverse)
 	int		len;
 	t_link	*last_link;
 	
-	len = stack_len(stack);
+	len = stack_len(*stack);
 	if (*stack == NULL || stack == NULL || len == 1)
 		return ;
 	last_link = get_last_link(*stack);

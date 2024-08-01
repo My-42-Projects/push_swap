@@ -6,7 +6,7 @@
 /*   By: dulrich <dulrich@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 14:30:44 by dulrich           #+#    #+#             */
-/*   Updated: 2024/07/30 21:19:32 by dulrich          ###   ########.fr       */
+/*   Updated: 2024/07/31 20:58:43 by dulrich          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ void	init_link(t_link **stack, int nbr, char **argv, int flag);
 //utils.c
 t_link	*get_last_link(t_link *head);
 t_link	*get_first_link(t_link *head);
-void	allocate_chunks(t_link **stack, int	*nbrs, int max_chunk, int	nbrs_per_chunk);
-int		stack_len(t_link **stack);
+void	allocate_chunks(t_link **stack, int *nbrs, int max_chunk, int nbrs_per_chunk);
+int		stack_len(t_link *stack);
 long	ft_atol(char *str);
 
 //free.c

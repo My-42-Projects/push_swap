@@ -6,7 +6,7 @@
 /*   By: dulrich <dulrich@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 07:58:53 by dulrich           #+#    #+#             */
-/*   Updated: 2024/07/27 21:19:17 by dulrich          ###   ########.fr       */
+/*   Updated: 2024/07/31 15:10:22 by dulrich          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	swap(t_link **stack)
 	t_link	*tmp;
 	int		len;
 
-	len = stack_len(stack);
+	len = stack_len(*stack);
 	if (stack == NULL || *stack == NULL || len <= 1)
 		return ;
 	tmp = *stack;

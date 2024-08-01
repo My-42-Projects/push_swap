@@ -6,7 +6,7 @@
 /*   By: dulrich <dulrich@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 09:38:37 by dulrich           #+#    #+#             */
-/*   Updated: 2024/07/30 21:21:06 by dulrich          ###   ########.fr       */
+/*   Updated: 2024/08/01 12:58:02 by dulrich          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ void	init_link(t_link **stack, int nbr, char **argv, int to_free)
 	if (!new_link)
 		ft_error(stack, argv, to_free);
 	new_link->nbr = nbr;
-	printf("%i\n", nbr);
 	new_link->next = NULL;
 	new_link->index = 0;
 	new_link->chunk = 0;
@@ -38,6 +37,7 @@ void	init_link(t_link **stack, int nbr, char **argv, int to_free)
 		last_link->next = new_link;
 		new_link->prev = last_link;
 	}
+	//printf("link nbr: %i\n", new_link->nbr);
 }
 
 void	init_stack(t_link **stack, char **argv, int to_free)
