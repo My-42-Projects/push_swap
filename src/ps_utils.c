@@ -6,7 +6,7 @@
 /*   By: dulrich <dulrich@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 10:00:14 by dulrich           #+#    #+#             */
-/*   Updated: 2024/07/31 15:11:30 by dulrich          ###   ########.fr       */
+/*   Updated: 2024/08/05 09:48:09 by dulrich          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,18 +23,32 @@ int	chunk_is_done(t_link **head, int chunk)
 	return (1);
 }
 
-t_link	*find_biggest_link(t_link **stack)
+t_link	*get_biggest_link(t_link *stack)
 {
 	t_link	*biggest;
 
-	biggest = *stack;
-	while (*stack)
+	biggest = stack;
+	while (stack)
 	{
-		if ((*stack)->nbr > biggest->nbr)
-			biggest = *stack;
-		*stack = (*stack)->next;
+		if (stack->nbr > biggest->nbr)
+			biggest = stack;
+		stack = stack->next;
 	}
 	return (biggest);
+}
+
+t_link	*get_smallest_link(t_link *stack)
+{
+	t_link	*smallest;
+	
+	smallest = stack;
+	while (stack)
+	{
+		if (stack->index < smallest->index)
+			smallest = stack;
+		stack = stack->next;
+	}
+	return (smallest);
 }
 
 char	*determine_rotation(t_link **stack, t_link *link)
@@ -43,6 +57,7 @@ char	*determine_rotation(t_link **stack, t_link *link)
 	int	mid;
 
 	mid = stack_len(*stack) / 2;
+	printf("%d\n", mid);
 	rot = 0;
 	while (*stack)
 	{
@@ -61,7 +76,7 @@ void	last_rotation(t_link **stack)
 	t_link	*biggest;
 	char	*rotation;
 
-	biggest = find_biggest_link(stack);
+	biggest = get_biggest_link(*stack);
 	rotation = determine_rotation(stack, biggest);
 	while (!is_sorted(*stack, TRUE))
 	{

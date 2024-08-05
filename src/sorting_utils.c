@@ -6,7 +6,7 @@
 /*   By: dulrich <dulrich@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 10:11:54 by dulrich           #+#    #+#             */
-/*   Updated: 2024/07/27 21:55:27 by dulrich          ###   ########.fr       */
+/*   Updated: 2024/08/04 11:00:07 by dulrich          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,9 @@ int	compare_moves(t_link *first, t_link *second)
 		return (1);
 }
 
-t_link	*calc_moves_to_push(t_link **stack, t_link *link, int flag)
+t_link	*calc_moves_to_push(t_link **stack, t_link *link, int first)
 {
-	if (flag)
+	if (first)
 		return(find_first_match(stack, link));
 	else
 		return (find_second_match(stack, link));

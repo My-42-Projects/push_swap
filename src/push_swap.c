@@ -6,7 +6,7 @@
 /*   By: dulrich <dulrich@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 09:54:46 by dulrich           #+#    #+#             */
-/*   Updated: 2024/08/01 13:06:33 by dulrich          ###   ########.fr       */
+/*   Updated: 2024/08/05 20:46:11 by dulrich          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,15 @@ void	push_swap(t_link **a, t_link **b)
 	int	len;
 
 	len = stack_len(*a);
-	if (len <= 3)
+	if (len == 2)
+		sa(a);
+	else if (len == 3)
 		sort_three(a);
 	else if (len <= 5)
 		sort_five(a, b);
 	else
 		sort_all(a, b, len);
+	free_links(a);
 }
 
 void	sort_all(t_link **a, t_link **b, int amount)
@@ -35,10 +38,11 @@ void	sort_all(t_link **a, t_link **b, int amount)
 	else
 		max_chunk = 11;
 	chunk = 0;
+	print_stack(*a, "a");
 	while (stack_len(*a))
 	{
 		get_cheapest_link(a, b, chunk);
-		if (chunk != max_chunk)
+		if (chunk < max_chunk)
 		{
 			if (chunk_is_done(a, chunk))
 				chunk++;
@@ -52,46 +56,47 @@ void	sort_all(t_link **a, t_link **b, int amount)
 
 void	sort_five(t_link **a, t_link **b)
 {
-	pb(a, b);
-	if (stack_len(*a) == 4)
-		pb(a, b);
-	sort_three(a);
-	if ((*b)->nbr > (*b)->next->nbr)
-			sb(b);
-	while (b)
+	t_link	*current;
+	t_link	*smallest;
+	int		index;
+
+	smallest = get_smallest_link(*a);
+	while (*a != smallest)
+		ra(a);
+	pb (a, b);
+	if (stack_len(*a) > 3)
 	{
-		while ((*b)->nbr > (*a)->nbr && (*b)->nbr < (*a)->next->nbr)
+		smallest = get_smallest_link(*a);
+		while (*a != smallest)
 			ra(a);
-		pa(a, b);
-		*b = (*b)->next;
+		pb (a, b);
 	}
+	sort_three(a);
+	if ((stack_len(*b) > 1) && ((*b)->nbr < (*b)->next->nbr))
+		sb(b);
+	while (*b)
+	{
+		current = *a;
+		index = (*b)->index;
+		if (current->index == index + 1)
+			pa(a, b);
+		else
+			ra(a);
+	}
+	smallest = get_smallest_link(*a);
+	while (*a != smallest)
+		ra(a);
 }
 
 void	sort_three(t_link **stack)
 {
-	t_link	*last_link;
+	t_link	*biggest;
 
-	last_link = get_last_link(*stack);
-	if (stack_len(*stack) == 2)
-		sa(stack);
-	else if (((*stack)->nbr > (*stack)->next->nbr) && 
-	((*stack)->nbr > (*stack)->next->next->nbr))
-	{
+	biggest = get_biggest_link(*stack);
+	if ((*stack) == biggest)
 		ra(stack);
-		if ((*stack)->next->nbr > (*stack)->next->next->nbr)
-			sa(stack);
-	}
-	else if (((*stack)->next->nbr > (*stack)->nbr) && 
-	((*stack)->next->nbr > (*stack)->nbr))
-	{
+	else if ((*stack)->next == biggest)
 		rra(stack);
-		if ((*stack)->next->next->nbr > (*stack)->nbr)
-			sa(stack);
-	}
-	else if ((last_link->nbr > (*stack)->nbr) &&
-			(last_link->nbr > (*stack)->next->nbr))
-	{
-		if ((*stack)->nbr > (*stack)->next->nbr)
-			sa(stack);
-	}
+	if ((*stack)->nbr > (*stack)->next->nbr)
+		sa(stack);
 }

@@ -6,7 +6,7 @@
 /*   By: dulrich <dulrich@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 09:51:15 by dulrich           #+#    #+#             */
-/*   Updated: 2024/08/01 10:43:03 by dulrich          ###   ########.fr       */
+/*   Updated: 2024/08/04 21:50:17 by dulrich          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,12 +88,8 @@ void	find_index(t_link *a)
 	printf("Unsorted:\n");
 	while (i < len)
 		printf("%i ", sort[i++]);
-	quicksort(sort, 0, len - 1);
-	i = 0;
-	printf("\nSorted:\n");
-	while (i < len)
-		printf("%i ", sort[i++]);
 	printf("\n");
+	quicksort(sort, 0, len - 1);
 	if (len <= 100)
 		allocate_chunks(&a, sort, 5, len / 5);
 	else

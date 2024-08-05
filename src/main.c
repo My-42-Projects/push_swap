@@ -6,7 +6,7 @@
 /*   By: dulrich <dulrich@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 09:38:37 by dulrich           #+#    #+#             */
-/*   Updated: 2024/08/01 12:58:02 by dulrich          ###   ########.fr       */
+/*   Updated: 2024/08/05 20:07:14 by dulrich          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ void	init_link(t_link **stack, int nbr, char **argv, int to_free)
 	new_link->chunk = 0;
 	new_link->rr = 0;
 	new_link->rrr = 0;
+	new_link->smallest = 0;
+	new_link->biggest = 0;
 	if (*stack == NULL)
 	{
 		*stack = new_link;
@@ -37,7 +39,6 @@ void	init_link(t_link **stack, int nbr, char **argv, int to_free)
 		last_link->next = new_link;
 		new_link->prev = last_link;
 	}
-	//printf("link nbr: %i\n", new_link->nbr);
 }
 
 void	init_stack(t_link **stack, char **argv, int to_free)
@@ -51,7 +52,7 @@ void	init_stack(t_link **stack, char **argv, int to_free)
 	{
 		if (is_syntax_error(argv[i]))
 		{
-			printf("syntax");
+			printf("syntax\n");
 			ft_error(stack, argv, to_free);
 		}
 		nbr = ft_atol(argv[i]);

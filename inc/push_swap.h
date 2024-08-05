@@ -6,7 +6,7 @@
 /*   By: dulrich <dulrich@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 14:30:44 by dulrich           #+#    #+#             */
-/*   Updated: 2024/07/31 20:58:43 by dulrich          ###   ########.fr       */
+/*   Updated: 2024/08/05 20:06:28 by dulrich          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ typedef struct s_link
 	int				chunk;
 	int				rr;
 	int				rrr;
+	int				biggest;
+	int				smallest;
 } t_link;
 
 //main.c
@@ -49,6 +51,7 @@ long	ft_atol(char *str);
 //free.c
 void	free_links(t_link **stack);
 void	free_artificial_argv(char **argv);
+void	print_stack(t_link *stack, char *name);
 
 //checks.c
 int		is_sorted(t_link *stack, int reverse);
@@ -81,7 +84,8 @@ void	push_swap(t_link **a, t_link **b);
 //ps_utils.c
 void	last_rotation(t_link **stack);
 char	*determine_rotation(t_link **stack, t_link *link);
-t_link	*find_biggest_link(t_link **stack);
+t_link	*get_smallest_link(t_link *stack);
+t_link	*get_biggest_link(t_link *stack);
 int		chunk_is_done(t_link **head, int chunk);
 
 //error.c
@@ -97,10 +101,10 @@ int		partition(int *nbrs, int first, int last);
 //sorting.c
 void	get_cheapest_link(t_link **a, t_link **b, int chunk);
 void	push_cheapest(t_link **a, t_link **b, t_link *first_link, t_link *second_link);
-void	choose_insertion(t_link **stack, t_link *link);
+t_link 	*choose_insertion(t_link **stack, t_link *link);
 
 //sorting_utils.c
-t_link	*calc_moves_to_push(t_link **stack, t_link *link, int flag);
+t_link	*calc_moves_to_push(t_link **stack, t_link *link, int first);
 int		compare_moves(t_link *first, t_link *second);
 t_link	*find_second_match(t_link **stack, t_link *link);
 t_link	*find_first_match(t_link **stack, t_link *link);

@@ -6,7 +6,7 @@
 /*   By: dulrich <dulrich@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 15:23:37 by dulrich           #+#    #+#             */
-/*   Updated: 2024/07/30 21:06:50 by dulrich          ###   ########.fr       */
+/*   Updated: 2024/08/05 18:34:07 by dulrich          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,15 @@ void	free_links(t_link **stack)
 		*stack = tmp;
 	}
 	*stack = NULL;
+}
+
+void	print_stack(t_link *stack, char *name)
+{
+	printf("Stack %s: ", name);
+	while (stack)
+	{
+		printf("%d ", stack->nbr);
+		stack = stack->next;
+	}
+	printf("\n");
 }

@@ -6,7 +6,7 @@
 /*   By: dulrich <dulrich@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 13:42:35 by dulrich           #+#    #+#             */
-/*   Updated: 2024/08/01 12:57:32 by dulrich          ###   ########.fr       */
+/*   Updated: 2024/08/05 20:43:28 by dulrich          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ void	allocate_chunks(t_link **stack, int	*nbrs, int max_chunk, int nbrs_per_chun
 	chunk = 1;
 	len = stack_len(*stack);
 	head = get_first_link(*stack);
-	//printf("\ni: %i\n", i);
 	if (*stack == NULL)
 		*stack = head;
 	while (i < len)
@@ -74,17 +73,16 @@ void	allocate_chunks(t_link **stack, int	*nbrs, int max_chunk, int nbrs_per_chun
 			*stack = head;
 		else
 			*stack = (*stack)->next;
-		//printf("Nbrs[i]: %i\n", nbrs[i]);
 		if (nbrs[i] == (*stack)->nbr)
 		{
-			//printf("Found2: %i\n", (*stack)->nbr);
-			(*stack)->index = i;
-			//printf("Index: %i\n", (*stack)->index);
-			(*stack)->chunk = chunk;
-			//printf("Chunk: %i\n", (*stack)->chunk);
-			//printf("i: %i\n", i);
+			if (i == 0)
+				(*stack)->smallest = TRUE;
 			i++;
 			j++;
+			(*stack)->index = i;
+			(*stack)->chunk = chunk;
+			if (i == len)
+				(*stack)->biggest = TRUE;
 		}
 		if (j == nbrs_per_chunk)
 		{
@@ -93,46 +91,8 @@ void	allocate_chunks(t_link **stack, int	*nbrs, int max_chunk, int nbrs_per_chun
 				chunk++;
 		}
 	}
-	*stack = get_first_link(*stack);
-	while (*stack)
-	{
-		printf("Stack->nbr: %i\n", (*stack)->nbr);
-		*stack = (*stack)->next;
-	}
+	printf("Chunks alloc'd\n");
 }
-
-/* void	allocate_chunks(t_link **stack, int	*nbrs, int max_chunk, int nbrs_per_chunk)
-{
-	int	i;
-	int	j;
-	int	len;
-	int	chunk;
-
-	i = 0;
-	j = 0;
-	chunk = 1;
-	len = stack_len(*stack);
-	while (i < len)
-	{
-		if (nbrs[i] == (*stack)->nbr)
-		{
-			(*stack)->index = i++;
-			(*stack)->chunk = chunk;
-			printf("i: %i\n", i);
-			j++;
-		}
-		if (*stack == NULL)
-			*stack = get_first_link(*stack);
-		else
-			*stack = (*stack)->next;
-		if (j == nbrs_per_chunk)
-		{
-			j = 0;
-			if (chunk != max_chunk)
-				chunk++;
-		}
-	}
-} */
 
 t_link	*get_first_link(t_link *head)
 {

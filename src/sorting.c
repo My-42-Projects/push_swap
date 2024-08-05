@@ -6,52 +6,56 @@
 /*   By: dulrich <dulrich@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 09:50:33 by dulrich           #+#    #+#             */
-/*   Updated: 2024/07/30 21:25:06 by dulrich          ###   ########.fr       */
+/*   Updated: 2024/08/05 19:38:49 by dulrich          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/push_swap.h"
 
-void	choose_insertion(t_link **stack, t_link *link)
+t_link	*choose_insertion(t_link **stack, t_link *link)
 {
 	t_link	*last;
 	int		reverse;
 
 	if (!(*stack) || !(*stack)->next)
-		return ;
+		return (NULL);
 	reverse = 0;
 	last = get_last_link(*stack);
 	if (ft_strncmp(determine_rotation(stack, link), "rrr", 3) == 0)
-		reverse = 1;
+		reverse = TRUE;
 	while (TRUE)
 	{
 		if (reverse)
 			rrb(stack);
 		else
 			rb(stack);
+		//same issue as with sort5 -> if value in 
 		if ((*stack)->next && (((*stack)->index < link->index)) && (last->index > link->index))
-			break ;
+			return (*stack);
 	}
 	
 }
 
 void	push_cheapest(t_link **a, t_link **b, t_link *first_link, t_link *second_link)
 {
-	int	push_first;
+	int		push_first;
+	t_link	*to_push;
 
 	push_first = compare_moves(first_link, second_link);
 	if (push_first)
 	{
 		while (first_link != *a)
 			ra(a);
-		choose_insertion(b, first_link);
+		to_push = choose_insertion(b, first_link);
 	}
 	else
 	{
 		while (second_link != *a)
 			rra(a);
-		choose_insertion(b, second_link);
+		to_push = choose_insertion(b, second_link);
 	}
+	while (*b != to_push)
+		rb(b);
 	pb(a, b);
 }
 

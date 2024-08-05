@@ -6,7 +6,7 @@
 /*   By: dulrich <dulrich@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 07:54:36 by dulrich           #+#    #+#             */
-/*   Updated: 2024/07/14 08:10:04 by dulrich          ###   ########.fr       */
+/*   Updated: 2024/08/04 20:53:03 by dulrich          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	push(t_link **dest, t_link **src)
 	*src = (*src)->next;
 	if (*src)
 		(*src)->prev = NULL;
+	to_push->prev = NULL;
 	if (*dest == NULL)
 	{
 		*dest = to_push;
