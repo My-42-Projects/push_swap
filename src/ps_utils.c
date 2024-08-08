@@ -6,50 +6,11 @@
 /*   By: dulrich <dulrich@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 10:00:14 by dulrich           #+#    #+#             */
-/*   Updated: 2024/08/05 09:48:09 by dulrich          ###   ########.fr       */
+/*   Updated: 2024/08/08 11:38:10 by dulrich          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/push_swap.h"
-
-int	chunk_is_done(t_link **head, int chunk)
-{
-	while (*head)
-	{
-		if ((*head)->chunk == chunk)
-			return (0);
-		*head = (*head)->next;
-	}
-	return (1);
-}
-
-t_link	*get_biggest_link(t_link *stack)
-{
-	t_link	*biggest;
-
-	biggest = stack;
-	while (stack)
-	{
-		if (stack->nbr > biggest->nbr)
-			biggest = stack;
-		stack = stack->next;
-	}
-	return (biggest);
-}
-
-t_link	*get_smallest_link(t_link *stack)
-{
-	t_link	*smallest;
-	
-	smallest = stack;
-	while (stack)
-	{
-		if (stack->index < smallest->index)
-			smallest = stack;
-		stack = stack->next;
-	}
-	return (smallest);
-}
 
 char	*determine_rotation(t_link **stack, t_link *link)
 {
@@ -58,17 +19,17 @@ char	*determine_rotation(t_link **stack, t_link *link)
 
 	mid = stack_len(*stack) / 2;
 	printf("%d\n", mid);
-	rot = 0;
+	rot = -1;
 	while (*stack)
 	{
+		rot++;
 		if (*stack == link)
 			break ;
-		rot++;
 	}
 	if (rot <= mid)
-		return ("rr");
+		return ("r");
 	else
-		return ("rrr");
+		return ("rr");
 }
 
 void	last_rotation(t_link **stack)
@@ -80,9 +41,50 @@ void	last_rotation(t_link **stack)
 	rotation = determine_rotation(stack, biggest);
 	while (!is_sorted(*stack, TRUE))
 	{
-		if (ft_strncmp(rotation, "rr", 2) == 0)
+		if (ft_strncmp(rotation, "r", 1) == 0)
 			rb(stack);
 		else
 			rrb(stack);
+	}
+}
+
+void	allocate_chunks(t_link **stack, int	*nbrs, int max_chunk, int nbrs_per_chunk)
+{
+	int	i;
+	int	j;
+	int	len;
+	int	chunk;
+	t_link	*head;
+
+	i = 0;
+	j = 0;
+	chunk = 0;
+	len = stack_len(*stack);
+	head = get_first_link(*stack);
+	if (*stack == NULL)
+		*stack = head;
+	while (i < len)
+	{
+		if ((*stack)->next == NULL)
+			*stack = head;
+		else
+			*stack = (*stack)->next;
+		if (nbrs[i] == (*stack)->nbr)
+		{
+			if (i == 0)
+				(*stack)->smallest = TRUE;
+			i++;
+			j++;
+			(*stack)->index = i;
+			(*stack)->chunk = chunk;
+			if (i == len)
+				(*stack)->biggest = TRUE;
+		}
+		if (j == nbrs_per_chunk)
+		{
+			j = 0;
+			if (chunk < max_chunk)
+				chunk++;
+		}
 	}
 }

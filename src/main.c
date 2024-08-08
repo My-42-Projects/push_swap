@@ -6,7 +6,7 @@
 /*   By: dulrich <dulrich@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 09:38:37 by dulrich           #+#    #+#             */
-/*   Updated: 2024/08/05 20:07:14 by dulrich          ###   ########.fr       */
+/*   Updated: 2024/08/06 14:32:04 by dulrich          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ void	init_link(t_link **stack, int nbr, char **argv, int to_free)
 	new_link->next = NULL;
 	new_link->index = 0;
 	new_link->chunk = 0;
+	new_link->r = 0;
 	new_link->rr = 0;
-	new_link->rrr = 0;
 	new_link->smallest = 0;
 	new_link->biggest = 0;
 	if (*stack == NULL)

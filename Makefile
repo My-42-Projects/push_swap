@@ -11,7 +11,7 @@ INC_DIR	= inc
 SRC = 	$(SRC_DIR)/main.c $(SRC_DIR)/utils.c $(SRC_DIR)/free.c $(SRC_DIR)/checks.c \
 		$(SRC_DIR)/push.c $(SRC_DIR)/rotate.c $(SRC_DIR)/swap.c $(SRC_DIR)/error.c \
 		$(SRC_DIR)/ps_utils.c $(SRC_DIR)/push_swap.c $(SRC_DIR)/quicksort.c \
-		$(SRC_DIR)/sorting.c $(SRC_DIR)/sorting_utils.c
+		$(SRC_DIR)/sorting.c $(SRC_DIR)/sorting_utils.c $(SRC_DIR)/get_links.c
 
 
 OBJ	= $(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)

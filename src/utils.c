@@ -6,7 +6,7 @@
 /*   By: dulrich <dulrich@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 13:42:35 by dulrich           #+#    #+#             */
-/*   Updated: 2024/08/05 20:43:28 by dulrich          ###   ########.fr       */
+/*   Updated: 2024/08/08 11:38:25 by dulrich          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,60 +52,13 @@ int	stack_len(t_link *stack)
 	return (len);
 }
 
-void	allocate_chunks(t_link **stack, int	*nbrs, int max_chunk, int nbrs_per_chunk)
+int	chunk_is_done(t_link **head, int chunk)
 {
-	int	i;
-	int	j;
-	int	len;
-	int	chunk;
-	t_link	*head;
-
-	i = 0;
-	j = 0;
-	chunk = 1;
-	len = stack_len(*stack);
-	head = get_first_link(*stack);
-	if (*stack == NULL)
-		*stack = head;
-	while (i < len)
+	while (*head)
 	{
-		if ((*stack)->next == NULL)
-			*stack = head;
-		else
-			*stack = (*stack)->next;
-		if (nbrs[i] == (*stack)->nbr)
-		{
-			if (i == 0)
-				(*stack)->smallest = TRUE;
-			i++;
-			j++;
-			(*stack)->index = i;
-			(*stack)->chunk = chunk;
-			if (i == len)
-				(*stack)->biggest = TRUE;
-		}
-		if (j == nbrs_per_chunk)
-		{
-			j = 0;
-			if (chunk < max_chunk)
-				chunk++;
-		}
+		if ((*head)->chunk == chunk)
+			return (0);
+		*head = (*head)->next;
 	}
-	printf("Chunks alloc'd\n");
-}
-
-t_link	*get_first_link(t_link *head)
-{
-	while (head->prev)
-		head = head->prev;
-	return (head);
-}
-
-t_link	*get_last_link(t_link *head)
-{
-	if (head == NULL)
-		return (NULL);
-	while (head->next)
-		head = head->next;
-	return (head);
+	return (1);
 }

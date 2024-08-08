@@ -6,7 +6,7 @@
 /*   By: dulrich <dulrich@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 14:30:44 by dulrich           #+#    #+#             */
-/*   Updated: 2024/08/05 20:06:28 by dulrich          ###   ########.fr       */
+/*   Updated: 2024/08/08 11:44:58 by dulrich          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ typedef struct s_link
 	int				nbr;
 	int				index;
 	int				chunk;
+	int				r;
 	int				rr;
-	int				rrr;
 	int				biggest;
 	int				smallest;
 } t_link;
@@ -42,11 +42,9 @@ void	init_stack(t_link **stack, char **argv, int flag);
 void	init_link(t_link **stack, int nbr, char **argv, int flag);
 
 //utils.c
-t_link	*get_last_link(t_link *head);
-t_link	*get_first_link(t_link *head);
-void	allocate_chunks(t_link **stack, int *nbrs, int max_chunk, int nbrs_per_chunk);
 int		stack_len(t_link *stack);
 long	ft_atol(char *str);
+int		chunk_is_done(t_link **head, int chunk);
 
 //free.c
 void	free_links(t_link **stack);
@@ -82,11 +80,16 @@ void	sort_all(t_link **a, t_link **b, int amount);
 void	push_swap(t_link **a, t_link **b);
 
 //ps_utils.c
+void	allocate_chunks(t_link **stack, int *nbrs, int max_chunk, int nbrs_per_chunk);
 void	last_rotation(t_link **stack);
 char	*determine_rotation(t_link **stack, t_link *link);
+
+//get_links.c
 t_link	*get_smallest_link(t_link *stack);
 t_link	*get_biggest_link(t_link *stack);
-int		chunk_is_done(t_link **head, int chunk);
+t_link	*get_last_link(t_link *head);
+t_link	*get_first_link(t_link *head);
+t_link	*get_closest_link(t_link **stack, t_link *link, int is_bigger);
 
 //error.c
 void	ft_error(t_link **stack, char **argv, int flag);
@@ -101,7 +104,7 @@ int		partition(int *nbrs, int first, int last);
 //sorting.c
 void	get_cheapest_link(t_link **a, t_link **b, int chunk);
 void	push_cheapest(t_link **a, t_link **b, t_link *first_link, t_link *second_link);
-t_link 	*choose_insertion(t_link **stack, t_link *link);
+void	choose_insertion(t_link **stack, t_link *link);
 
 //sorting_utils.c
 t_link	*calc_moves_to_push(t_link **stack, t_link *link, int first);
