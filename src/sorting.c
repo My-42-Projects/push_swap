@@ -6,7 +6,7 @@
 /*   By: dulrich <dulrich@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 09:50:33 by dulrich           #+#    #+#             */
-/*   Updated: 2024/08/08 16:30:28 by dulrich          ###   ########.fr       */
+/*   Updated: 2024/08/08 17:27:15 by dulrich          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,9 @@ void	push_cheapest(t_link **a, t_link **b, t_link *first, t_link *second)
 	push_first = compare_moves(first, second);
 	if (push_first)
 	{
-		printf("3\n");
-		while (first != *a)
+		printf("First link->nbr: %d\n", first->nbr);
+		exit (1);
+		while (*a != first)
 			ra(a);
 		print_stack(*a, "a after rotating & before insertion");
 		choose_insertion(b, first);
@@ -91,19 +92,14 @@ void	get_cheapest_link(t_link **a, t_link **b, int chunk)
 	i = 0;
 	cheapest_link1 = NULL;
 	cheapest_link2 = NULL;
-	printf("%d\n", chunk);
 	print_stack(*a, "a before getting cheapest link");
-	/* while (current)
-	{
-		printf("%d is in chunk %d\n", current->nbr, current->chunk);
-		current = current->next;
-	} */
 	current = get_first_link(*a);
 	while (current)
 	{
 		if (current->chunk == chunk)
 		{
 			printf("Finding first link\n");
+			exit(1);
 			cheapest_link1 = calc_moves_to_push(a, current, TRUE);
 			printf("Cheapest_link1->nbr: %d\n", cheapest_link1->nbr);
 		}
@@ -113,22 +109,19 @@ void	get_cheapest_link(t_link **a, t_link **b, int chunk)
 			current = get_last_link(*a);
 			while (current != cheapest_link1)
 			{
+				printf("Finding second link\n");
 				if (current->chunk == chunk)
 				{
-					printf("Finding second link\n");
 					cheapest_link2 = calc_moves_to_push(a, current, FALSE);
 					break ;
 				}
 				current = current->prev;
 			}
+			break ;
 		}
 		current = current->next;
-		// print_stack(*a, "a after one round of get_cheapest_link");
 		printf("Current->nbr: %d\n", current->nbr);
-		i++;
-		printf("Rounds gone: %d\n", i);
-		if (i == 10)
-			exit (1);
-	}
+		printf("Rounds gone: %d\n", ++i);
 	push_cheapest(a, b, cheapest_link1, cheapest_link2);
+	}
 }

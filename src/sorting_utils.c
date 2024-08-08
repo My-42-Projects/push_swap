@@ -6,7 +6,7 @@
 /*   By: dulrich <dulrich@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 10:11:54 by dulrich           #+#    #+#             */
-/*   Updated: 2024/08/06 21:42:14 by dulrich          ###   ########.fr       */
+/*   Updated: 2024/08/08 17:25:40 by dulrich          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	compare_moves(t_link *first, t_link *second)
 {
-	if (second && (second->rr < first->r))
+	if (second != NULL && (second->rr < first->r))
 		return (0);
 	else
 		return (1);
