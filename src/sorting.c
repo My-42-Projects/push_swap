@@ -6,7 +6,7 @@
 /*   By: dulrich <dulrich@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 09:50:33 by dulrich           #+#    #+#             */
-/*   Updated: 2024/08/11 15:38:15 by dulrich          ###   ########.fr       */
+/*   Updated: 2024/08/11 20:04:51 by dulrich          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,15 +64,12 @@ void	get_cheapest_link(t_link **a, t_link **b, int chunk)
 	t_link	*cheapest_link1;
 	t_link	*cheapest_link2;
 	t_link	*current;
-	int		i;
 
-	i = 0;
 	cheapest_link1 = NULL;
 	cheapest_link2 = NULL;
 	current = get_first_link(*a);
 	while (current)
 	{
-		print_stack(*a, "a");
 		if (current->chunk == chunk)
 		{
 			cheapest_link1 = calc_moves_to_push(a, current, TRUE);
@@ -92,10 +89,6 @@ void	get_cheapest_link(t_link **a, t_link **b, int chunk)
 			break ;
 		}
 		current = current->next;
-		printf("Current->nbr: %d\n", current->nbr);
-		printf("Rounds gone: %d\n", ++i);
 	}
 	push_cheapest(a, b, cheapest_link1, cheapest_link2);
-	print_stack(*a, "a after pb");
-	print_stack(*b, "b after pb");
 }

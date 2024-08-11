@@ -6,7 +6,7 @@
 /*   By: dulrich <dulrich@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 09:38:37 by dulrich           #+#    #+#             */
-/*   Updated: 2024/08/06 14:32:04 by dulrich          ###   ########.fr       */
+/*   Updated: 2024/08/11 21:54:09 by dulrich          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,25 +47,18 @@ void	init_stack(t_link **stack, char **argv, int to_free)
 	long	nbr;
 
 	i = 1;
+	if (to_free)
+		i = 0;
 	nbr = 0;
 	while (argv[i])
 	{
 		if (is_syntax_error(argv[i]))
-		{
-			printf("syntax\n");
 			ft_error(stack, argv, to_free);
-		}
 		nbr = ft_atol(argv[i]);
 		if (nbr > INT_MAX || nbr < INT_MIN)
-		{
-			printf("min/max");
 			ft_error(stack, argv, to_free);
-		}
 		if (is_duplicate(*stack, (int)nbr))
-		{
-			printf("dup");
 			ft_error(stack, argv, to_free);
-		}
 		init_link(stack, (int)nbr, argv, to_free);
 		i++;
 	}
@@ -82,9 +75,9 @@ int	main(int argc, char **argv)
 	a = NULL;
 	b = NULL;
 	to_free = FALSE;
-	if (argc <= 1)
+	if (argc == 1 || (argc == 2 && !argv[1][0]))
 		return (1);
-	else if (argc == 2 && argv[1][0])
+	else if (argc == 2)
 	{
 		argv = ft_split(argv[1], ' ');
 		to_free = TRUE;

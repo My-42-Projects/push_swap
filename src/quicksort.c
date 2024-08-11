@@ -6,7 +6,7 @@
 /*   By: dulrich <dulrich@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 09:51:15 by dulrich           #+#    #+#             */
-/*   Updated: 2024/08/04 21:50:17 by dulrich          ###   ########.fr       */
+/*   Updated: 2024/08/11 19:31:06 by dulrich          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ int	*get_ints(t_link *stack)
 	int	len;
 
 	len = stack_len(stack);
-	printf("stack_len: %i\n", len);
 	nbrs = (int *)malloc(len * sizeof(int));
 	if (!nbrs)
 		ps_error(&stack);
@@ -80,15 +79,9 @@ void	find_index(t_link *a)
 {
 	int	*sort;
 	int	len;
-	int	i;
 
 	len = stack_len(a);
 	sort = get_ints(a);
-	i = 0;
-	printf("Unsorted:\n");
-	while (i < len)
-		printf("%i ", sort[i++]);
-	printf("\n");
 	quicksort(sort, 0, len - 1);
 	if (len <= 100)
 		allocate_chunks(&a, sort, 5, len / 5);

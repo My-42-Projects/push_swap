@@ -6,47 +6,13 @@
 /*   By: dulrich <dulrich@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 12:26:31 by dulrich           #+#    #+#             */
-/*   Updated: 2024/07/28 21:58:11 by dulrich          ###   ########.fr       */
+/*   Updated: 2024/08/11 21:01:16 by dulrich          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-// size_t	ft_strlen(const char *s)
-// {
-// 	size_t	i;
-
-// 	i = 0;
-// 	while (s[i])
-// 		i++;
-// 	return (i);
-// }
-
-// char	*ft_substr(char const *s, unsigned int start, size_t len)
-// {
-// 	char	*substr;
-// 	size_t	i;
-
-// 	if (!s)
-// 		return (NULL);
-// 	if (start >= ft_strlen(s))
-// 		len = 0;
-// 	else if (start + len > ft_strlen(s))
-// 		len = ft_strlen(s) - start;
-// 	substr = (char *)malloc((len + 1) * sizeof(char));
-// 	if (!substr)
-// 		return (NULL);
-// 	i = 0;
-// 	while (i < len)
-// 	{
-// 		substr[i] = s[start + i];
-// 		i++;
-// 	}
-// 	substr[i] = '\0';
-// 	return (substr);
-// }
-
-static int	ft_count(const char *s, int c)
+/* static int	ft_count(const char *s, int c)
 {
 	int	i;
 	int	num_of_str;
@@ -131,22 +97,93 @@ char	**ft_split(char const *s, char c)
 	}
 	str_arr[i] = NULL;
 	return (str_arr);
+} */
+
+static void	free_split(char **arr_of_str)
+{
+	int		i;
+
+	i = 0;
+	while (arr_of_str[i])
+	{
+		free(arr_of_str[i]);
+		i++;
+	}
+	free(arr_of_str);
+	exit(1);
 }
 
-// #include <stdio.h>
-// int main(void)
-// {
-// 	char c = ' ';
-// 	char *s = " Hippo po ta mus ";
-// 	char **result;
+static int	count_words(char *str, char separator)
+{
+	int		i;
+	bool	is_inside_word;
 
-// 	result = ft_split(s, c);
-// 	int i = 0;
-// 	while (result[i])
-// 	{
-// 		printf("%s", result[i]);
-// 		i++;
-// 	}
-// 	ft_free_split(result);
-// 	return (0);
-// }
+	i = 0;
+	while (*str)
+	{
+		is_inside_word = false;
+		while (*str && *str == separator)
+			str++;
+		while (*str && *str != separator)
+		{
+			if (!is_inside_word)
+			{
+				i++;
+				is_inside_word = true;
+			}
+			str++;
+		}
+	}
+	return (i);
+}
+
+static char	*get_next_word(char *str, char separator)
+{
+	static int	index = 0;
+	int			i;
+	int			len;
+	char		*next_str;
+
+	i = 0;
+	len = 0;
+	while (str[index] == separator)
+		index++;
+	while (str[index + len] && (str[index + len] != separator))
+		len++;
+	next_str = malloc((size_t)len * sizeof(char) + 1);
+	if (!next_str)
+		return (NULL);
+	while (str[index] && (str[index] != separator))
+		next_str[i++] = str[index++];
+	next_str[i] = '\0';
+	return (next_str);
+}
+
+char	**ft_split(char *s, char c)
+{
+	int		nbr_of_words;
+	char	**arr_of_str;
+	int		i;
+
+	i = 0;
+	nbr_of_words = count_words(s, c);
+	if (!nbr_of_words)
+		exit(1);
+	arr_of_str = malloc(sizeof(char *) * (size_t)(nbr_of_words + 2));
+	if (!arr_of_str)
+		return (NULL);
+	while (nbr_of_words-- >= 0)
+	{
+		if (i == 0)
+		{
+			arr_of_str[i] = malloc(sizeof(char));
+			if (arr_of_str[i] == NULL)
+				free_split(arr_of_str);
+			arr_of_str[i++][0] = '\0';
+			continue ;
+		}
+		arr_of_str[i++] = get_next_word(s, c);
+	}
+	arr_of_str[i] = NULL;
+	return (arr_of_str);
+}
