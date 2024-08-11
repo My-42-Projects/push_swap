@@ -6,7 +6,7 @@
 /*   By: dulrich <dulrich@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 13:42:35 by dulrich           #+#    #+#             */
-/*   Updated: 2024/08/08 11:38:25 by dulrich          ###   ########.fr       */
+/*   Updated: 2024/08/10 10:46:17 by dulrich          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,16 @@ int	stack_len(t_link *stack)
 	return (len);
 }
 
-int	chunk_is_done(t_link **head, int chunk)
+int	chunk_is_done(t_link **stack, int chunk)
 {
-	while (*head)
+	t_link	*head;
+
+	head = *stack;
+	while (head)
 	{
-		if ((*head)->chunk == chunk)
+		if (head->chunk == chunk)
 			return (0);
-		*head = (*head)->next;
+		head = head->next;
 	}
 	return (1);
 }

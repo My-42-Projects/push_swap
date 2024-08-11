@@ -6,7 +6,7 @@
 /*   By: dulrich <dulrich@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 10:11:54 by dulrich           #+#    #+#             */
-/*   Updated: 2024/08/08 17:25:40 by dulrich          ###   ########.fr       */
+/*   Updated: 2024/08/10 12:34:12 by dulrich          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,21 +22,22 @@ int	compare_moves(t_link *first, t_link *second)
 
 t_link	*find_first_match(t_link **stack, t_link *link)
 {
-	int	r;
+	int		r;
+	t_link	*current;
 
 	if (!stack || !link)
 		return (NULL);
-	print_stack(*stack, "a before finding first match");
 	r = 0;
-	while (*stack)
+	current = *stack;
+	while (current)
 	{
-		if (*stack == link)
+		if (current == link)
 		{
 			link->r = r;
 			return (link);
 		}
 		r++;
-		*stack = (*stack)->next;
+		current = current->next;
 	}
 	return (NULL);
 }

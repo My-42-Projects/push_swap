@@ -6,7 +6,7 @@
 /*   By: dulrich <dulrich@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 11:37:32 by dulrich           #+#    #+#             */
-/*   Updated: 2024/08/08 12:04:04 by dulrich          ###   ########.fr       */
+/*   Updated: 2024/08/11 15:31:28 by dulrich          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,12 @@ t_link	*get_closest_link(t_link **stack, t_link *link, int is_bigger)
 
 	closest = *stack;
 	current = *stack;
+	print_stack(*stack, "b before getting closest link");
 	if (is_bigger)
 	{
 		while (current)
 		{
-			if (current->index < closest->index && current->index < link->index)
+			if (current->index < link->index && current->index > closest->index)
 				closest = current;
 			current = current->next;
 		}
@@ -76,9 +77,9 @@ t_link	*get_closest_link(t_link **stack, t_link *link, int is_bigger)
 	{
 		while (current)
 		{
-		if (current->index < closest->index && current->index < link->index)
-			closest = current;
-		current = current->next;
+			if (current->index > link->index && current->index < closest->index)
+				closest = current;
+			current = current->next;
 		}
 	}
 	return (closest);

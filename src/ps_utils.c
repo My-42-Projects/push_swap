@@ -6,7 +6,7 @@
 /*   By: dulrich <dulrich@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 10:00:14 by dulrich           #+#    #+#             */
-/*   Updated: 2024/08/08 11:38:10 by dulrich          ###   ########.fr       */
+/*   Updated: 2024/08/11 12:22:12 by dulrich          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,20 @@
 
 char	*determine_rotation(t_link **stack, t_link *link)
 {
+	t_link	*current;
 	int	rot;
 	int	mid;
 
 	mid = stack_len(*stack) / 2;
 	printf("%d\n", mid);
+	current = *stack;
 	rot = -1;
-	while (*stack)
+	while (current)
 	{
 		rot++;
-		if (*stack == link)
+		if (current == link)
 			break ;
+		current = current->next;
 	}
 	if (rot <= mid)
 		return ("r");
@@ -39,6 +42,7 @@ void	last_rotation(t_link **stack)
 
 	biggest = get_biggest_link(*stack);
 	rotation = determine_rotation(stack, biggest);
+	exit (1);
 	while (!is_sorted(*stack, TRUE))
 	{
 		if (ft_strncmp(rotation, "r", 1) == 0)

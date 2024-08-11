@@ -6,7 +6,7 @@
 /*   By: dulrich <dulrich@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 09:54:46 by dulrich           #+#    #+#             */
-/*   Updated: 2024/08/06 21:35:35 by dulrich          ###   ########.fr       */
+/*   Updated: 2024/08/11 15:38:07 by dulrich          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,14 @@ void	sort_all(t_link **a, t_link **b, int amount)
 		{
 			if (chunk_is_done(a, chunk))
 				chunk++;
+			printf("Chunk: %d\n", chunk);
 		}
 	}
 	if (!is_sorted(*b, TRUE))
 		last_rotation(b);
 	while (stack_len(*b))
 		pa(a, b);
+	print_stack(*a, "a after finishing");
 }
 
 void	sort_five(t_link **a, t_link **b)
