@@ -6,7 +6,7 @@
 /*   By: dulrich <dulrich@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 11:37:32 by dulrich           #+#    #+#             */
-/*   Updated: 2024/08/11 15:47:43 by dulrich          ###   ########.fr       */
+/*   Updated: 2024/08/17 21:37:39 by dulrich          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,25 @@ t_link	*get_smallest_link(t_link *stack)
 	return (smallest);
 }
 
+int	is_closer(int to_push, int closest, int current)
+{
+	if ((to_push - current) < 0)
+	{
+		if (((to_push - current) * -1) < (to_push - closest))
+			return (1);
+		else if ((to_push - closest) < 0)
+		{
+			if (((to_push - current) * -1) < ((to_push - closest) * -1))
+				return (1);
+		}
+		else
+			return (0);
+	}
+	else if ((to_push - current) < (to_push - closest))
+		return (1);
+	return (0);
+}
+
 t_link	*get_closest_link(t_link **stack, t_link *link, int is_bigger)
 {
 	t_link	*closest;
@@ -67,7 +86,7 @@ t_link	*get_closest_link(t_link **stack, t_link *link, int is_bigger)
 	{
 		while (current)
 		{
-			if (current->index < link->index && current->index > closest->index)
+			if (current->index > closest->index)
 				closest = current;
 			current = current->next;
 		}
@@ -76,7 +95,7 @@ t_link	*get_closest_link(t_link **stack, t_link *link, int is_bigger)
 	{
 		while (current)
 		{
-			if (current->index > link->index && current->index < closest->index)
+			if (is_closer(link->index, closest->index, current->index))
 				closest = current;
 			current = current->next;
 		}

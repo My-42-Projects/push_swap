@@ -6,13 +6,13 @@
 /*   By: dulrich <dulrich@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 10:00:14 by dulrich           #+#    #+#             */
-/*   Updated: 2024/08/11 19:29:58 by dulrich          ###   ########.fr       */
+/*   Updated: 2024/08/17 12:13:13 by dulrich          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/push_swap.h"
 
-char	*determine_rotation(t_link **stack, t_link *link)
+int	determine_rotation(t_link **stack, t_link *link)
 {
 	t_link	*current;
 	int	rot;
@@ -29,25 +29,27 @@ char	*determine_rotation(t_link **stack, t_link *link)
 		current = current->next;
 	}
 	if (rot <= mid)
-		return ("r");
+		return (1);
 	else
-		return ("rr");
+		return (0);
 }
 
 void	last_rotation(t_link **stack)
 {
 	t_link	*biggest;
-	char	*rotation;
+	t_link	*current;
+	int		norm_rot;
 
 	biggest = get_biggest_link(*stack);
-	rotation = determine_rotation(stack, biggest);
-	exit (1);
-	while (!is_sorted(*stack, TRUE))
+	norm_rot = determine_rotation(stack, biggest);
+	current = *stack;
+	while (current != biggest)
 	{
-		if (ft_strncmp(rotation, "r", 1) == 0)
+		if (norm_rot)
 			rb(stack);
 		else
 			rrb(stack);
+		current = *stack;
 	}
 }
 

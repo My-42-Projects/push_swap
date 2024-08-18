@@ -6,7 +6,7 @@
 /*   By: dulrich <dulrich@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 14:30:44 by dulrich           #+#    #+#             */
-/*   Updated: 2024/08/08 11:44:58 by dulrich          ###   ########.fr       */
+/*   Updated: 2024/08/18 10:19:02 by dulrich          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,11 +62,15 @@ void	pa(t_link **a, t_link **b);
 void	push(t_link **dest, t_link **src);
 
 //rotate.c
-void	rrb(t_link **b);
-void	rb(t_link **b);
-void	rra(t_link **a);
-void	ra(t_link **a);
 void	rotate(t_link **stack, int reverse);
+void	rb(t_link **b);
+void	ra(t_link **a);
+void	rr(t_link **a, t_link **b);
+
+//rev_rotate.c
+void	rra(t_link **a);
+void	rrb(t_link **b);
+void	rrr(t_link **a, t_link **b);
 
 //swap.c
 void	sb(t_link **b);
@@ -82,13 +86,14 @@ void	push_swap(t_link **a, t_link **b);
 //ps_utils.c
 void	allocate_chunks(t_link **stack, int *nbrs, int max_chunk, int nbrs_per_chunk);
 void	last_rotation(t_link **stack);
-char	*determine_rotation(t_link **stack, t_link *link);
+int		determine_rotation(t_link **stack, t_link *link);
 
 //get_links.c
 t_link	*get_smallest_link(t_link *stack);
 t_link	*get_biggest_link(t_link *stack);
 t_link	*get_last_link(t_link *head);
 t_link	*get_first_link(t_link *head);
+int		is_closer(int to_push, int closest, int current);
 t_link	*get_closest_link(t_link **stack, t_link *link, int is_bigger);
 
 //error.c
@@ -104,7 +109,7 @@ int		partition(int *nbrs, int first, int last);
 //sorting.c
 void	get_cheapest_link(t_link **a, t_link **b, int chunk);
 void	push_cheapest(t_link **a, t_link **b, t_link *first_link, t_link *second_link);
-void	choose_insertion(t_link **stack, t_link *link);
+int		choose_insertion(t_link **stack, t_link *link);
 
 //sorting_utils.c
 t_link	*calc_moves_to_push(t_link **stack, t_link *link, int first);

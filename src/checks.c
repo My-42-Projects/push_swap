@@ -6,7 +6,7 @@
 /*   By: dulrich <dulrich@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 19:12:39 by dulrich           #+#    #+#             */
-/*   Updated: 2024/08/11 21:42:43 by dulrich          ###   ########.fr       */
+/*   Updated: 2024/08/12 08:28:29 by dulrich          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ int	is_syntax_error(char *str)
 	int	i;
 
 	i = 0;
-	printf("%c\n", str[i]);
 	if (!(str[i] == '+' || str[i] == '-' || (str[i] >= '0' && str[i] <= '9')))
 		return (1);
 	if ((str[i] == '+' || str[i] == '-') && !(str[i + 1] >= '0' && str[i + 1] <= '9'))

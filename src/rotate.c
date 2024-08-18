@@ -6,7 +6,7 @@
 /*   By: dulrich <dulrich@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 21:56:25 by dulrich           #+#    #+#             */
-/*   Updated: 2024/08/04 09:02:45 by dulrich          ###   ########.fr       */
+/*   Updated: 2024/08/18 10:17:49 by dulrich          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,20 +45,15 @@ void	ra(t_link **a)
 	write(1, "ra\n", 3);
 }
 
-void	rra(t_link **a)
-{
-	rotate(a, TRUE);
-	write(1, "rra\n", 4);
-}
-
 void	rb(t_link **b)
 {
 	rotate(b, FALSE);
 	write(1, "rb\n", 3);
 }
 
-void	rrb(t_link **b)
+void	rr(t_link **a, t_link **b)
 {
-	rotate(b, TRUE);
-	write(1, "rrb\n", 4);
+	rotate(a, FALSE);
+	rotate(b, FALSE);
+	write(1, "rr\n", 3);
 }

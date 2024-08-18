@@ -6,39 +6,97 @@
 /*   By: dulrich <dulrich@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 09:50:33 by dulrich           #+#    #+#             */
-/*   Updated: 2024/08/11 20:04:51 by dulrich          ###   ########.fr       */
+/*   Updated: 2024/08/18 12:32:36 by dulrich          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/push_swap.h"
 
-//Make it more efficient by finding out which way to rotate
-void	choose_insertion(t_link **stack, t_link *link)
+/* int	choose_insertion(t_link **stack, t_link *link)
 {
 	t_link	*biggest;
 	t_link	*closest;
-	// int		reverse;
+	int		norm_rot;
+	int		is_bigger;
 
 	if (stack == NULL || (*stack) == NULL)
-		return ;
-	/* reverse = FALSE;
-	if (ft_strncmp(determine_rotation(stack, link), "rr", 2) == 0)
-		reverse = TRUE; */
+		return (1);
+	is_bigger = FALSE;
 	biggest = get_biggest_link(*stack);
 	if (link->index > biggest->index)
+	{
 		closest = get_closest_link(stack, link, 1);
+		is_bigger = TRUE;
+	}
+	else
+		closest = get_closest_link(stack, link, 0);
+	norm_rot = determine_rotation(stack, closest);
+	if (norm_rot)
+	{
+		while (*stack != closest)
+			rb(stack);
+	}
+	else
+	{
+		while (*stack != closest)
+			rrb(stack);
+	}
+	return (is_bigger);
+} */
+
+int	choose_insertion(t_link **stack, t_link *link)
+{
+	t_link	*biggest;
+	t_link	*closest;
+	int		is_bigger;
+
+	if (stack == NULL || (*stack) == NULL)
+		return (1);
+	is_bigger = FALSE;
+	biggest = get_biggest_link(*stack);
+	if (link->index > biggest->index)
+	{
+		closest = get_closest_link(stack, link, 1);
+		is_bigger = TRUE;
+	}
 	else
 		closest = get_closest_link(stack, link, 0);
 	while (*stack != closest)
 		rb(stack);
+	return (is_bigger);
 }
 
-//Rotate or rev rot **a until the link to push is at the top,
-//then find where to insert it into **b
-//lastly, rotate **b to the correct spot and then push
+/* void	push_cheapest(t_link **a, t_link **b, t_link *first, t_link *second)
+{
+	int	push_first;
+	int	is_bigger;
+
+	is_bigger = FALSE;
+	push_first = compare_moves(first, second);
+	if (push_first)
+	{
+		while (*a != first)
+			ra(a);
+		if (choose_insertion(b, first) == 1)
+			is_bigger = TRUE;
+	}
+	else
+	{
+		while (*a != second)
+			rra(a);
+		if (choose_insertion(b, second) == 1)
+			is_bigger = TRUE;
+	}
+	pb(a, b);
+	if (is_bigger)
+		printf("is_bigger\n");
+	if ((*b)->next && (*b)->index < (*b)->next->index)
+		sb(b);
+} */
+
 void	push_cheapest(t_link **a, t_link **b, t_link *first, t_link *second)
 {
-	int		push_first;
+	int	push_first;
 
 	push_first = compare_moves(first, second);
 	if (push_first)
@@ -53,6 +111,8 @@ void	push_cheapest(t_link **a, t_link **b, t_link *first, t_link *second)
 			rra(a);
 		choose_insertion(b, second);
 	}
+/* 	print_stack(*a, "a before pushing");
+	print_stack(*b, "b before pushing"); */
 	pb(a, b);
 	if ((*b)->next && (*b)->index < (*b)->next->index)
 		sb(b);
@@ -71,9 +131,7 @@ void	get_cheapest_link(t_link **a, t_link **b, int chunk)
 	while (current)
 	{
 		if (current->chunk == chunk)
-		{
 			cheapest_link1 = calc_moves_to_push(a, current, TRUE);
-		}
 		if (cheapest_link1 != NULL)
 		{
 			current = get_last_link(*a);

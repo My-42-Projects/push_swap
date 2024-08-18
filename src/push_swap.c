@@ -6,7 +6,7 @@
 /*   By: dulrich <dulrich@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 09:54:46 by dulrich           #+#    #+#             */
-/*   Updated: 2024/08/11 20:05:11 by dulrich          ###   ########.fr       */
+/*   Updated: 2024/08/18 12:35:07 by dulrich          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	push_swap(t_link **a, t_link **b)
 		sort_five(a, b);
 	else
 		sort_all(a, b, len);
-	print_stack(*a, "a after sorting");
+	// print_stack(*a, "a after sorting");
 	free_links(a);
 }
 
@@ -39,7 +39,7 @@ void	sort_all(t_link **a, t_link **b, int amount)
 	else
 		max_chunk = 11;
 	chunk = 0;
-	while (stack_len(*a))
+	while (*a)
 	{
 		get_cheapest_link(a, b, chunk);
 		if (chunk < max_chunk)
@@ -50,7 +50,7 @@ void	sort_all(t_link **a, t_link **b, int amount)
 	}
 	if (!is_sorted(*b, TRUE))
 		last_rotation(b);
-	while (stack_len(*b))
+	while (*b)
 		pa(a, b);
 }
 

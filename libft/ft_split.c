@@ -6,13 +6,13 @@
 /*   By: dulrich <dulrich@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 12:26:31 by dulrich           #+#    #+#             */
-/*   Updated: 2024/08/11 21:01:16 by dulrich          ###   ########.fr       */
+/*   Updated: 2024/08/12 08:30:41 by dulrich          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-/* static int	ft_count(const char *s, int c)
+static int	ft_count(const char *s, int c)
 {
 	int	i;
 	int	num_of_str;
@@ -97,9 +97,9 @@ char	**ft_split(char const *s, char c)
 	}
 	str_arr[i] = NULL;
 	return (str_arr);
-} */
+}
 
-static void	free_split(char **arr_of_str)
+/* static void	free_split(char **arr_of_str)
 {
 	int		i;
 
@@ -159,7 +159,7 @@ static char	*get_next_word(char *str, char separator)
 	return (next_str);
 }
 
-char	**ft_split(char *s, char c)
+char	**alt_split(char *s, char c)
 {
 	int		nbr_of_words;
 	char	**arr_of_str;
@@ -167,8 +167,8 @@ char	**ft_split(char *s, char c)
 
 	i = 0;
 	nbr_of_words = count_words(s, c);
-	if (!nbr_of_words)
-		exit(1);
+	if (nbr_of_words <= 1)
+		exit(0);
 	arr_of_str = malloc(sizeof(char *) * (size_t)(nbr_of_words + 2));
 	if (!arr_of_str)
 		return (NULL);
@@ -186,4 +186,4 @@ char	**ft_split(char *s, char c)
 	}
 	arr_of_str[i] = NULL;
 	return (arr_of_str);
-}
+} */
