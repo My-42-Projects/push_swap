@@ -6,7 +6,7 @@
 /*   By: dulrich <dulrich@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 09:50:33 by dulrich           #+#    #+#             */
-/*   Updated: 2024/08/18 12:32:36 by dulrich          ###   ########.fr       */
+/*   Updated: 2024/08/19 19:30:32 by dulrich          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,26 +44,21 @@
 	return (is_bigger);
 } */
 
-int	choose_insertion(t_link **stack, t_link *link)
+//Works!!!
+
+t_link	*choose_insertion(t_link **stack, t_link *link)
 {
 	t_link	*biggest;
 	t_link	*closest;
-	int		is_bigger;
 
 	if (stack == NULL || (*stack) == NULL)
-		return (1);
-	is_bigger = FALSE;
+		return (NULL);
 	biggest = get_biggest_link(*stack);
 	if (link->index > biggest->index)
-	{
 		closest = get_closest_link(stack, link, 1);
-		is_bigger = TRUE;
-	}
 	else
 		closest = get_closest_link(stack, link, 0);
-	while (*stack != closest)
-		rb(stack);
-	return (is_bigger);
+	return (closest);
 }
 
 /* void	push_cheapest(t_link **a, t_link **b, t_link *first, t_link *second)
@@ -94,25 +89,78 @@ int	choose_insertion(t_link **stack, t_link *link)
 		sb(b);
 } */
 
-void	push_cheapest(t_link **a, t_link **b, t_link *first, t_link *second)
+//add an option to rr or rrr if applicable to save on moves
+/* void	push_cheapest(t_link **a, t_link **b, t_link *first, t_link *second)
 {
-	int	push_first;
+	t_link	*closest;
+	t_link	*current;
+	int		push_first;
+	int		times;
 
 	push_first = compare_moves(first, second);
 	if (push_first)
 	{
-		while (*a != first)
+		closest = choose_insertion(b, first);
+		times = calc_rot_both(a, b, first, closest);
+		rr(a, b, times);
+		current = *a;
+		while (current != first)
+		{
 			ra(a);
-		choose_insertion(b, first);
+			current = *a;
+		}
+		current = *b;
+		while (current != closest)
+		{
+			rb(b);
+			current = *b;
+		}
 	}
 	else
 	{
-		while (*a != second)
+		closest = choose_insertion(b, second);
+		times = calc_rot_both(a, b, second, closest);
+		rrr(a, b, times);
+		current = *a;
+		while (current != first)
+		{
 			rra(a);
-		choose_insertion(b, second);
+			current = *a;
+		}
+		current = *b;
+		while (current != closest)
+		{
+			rrb(b);
+			current = *b;
+		}
 	}
-/* 	print_stack(*a, "a before pushing");
-	print_stack(*b, "b before pushing"); */
+	pb(a, b);
+	if ((*b)->next && (*b)->index < (*b)->next->index)
+		sb(b);
+} */
+
+void	push_cheapest(t_link **a, t_link **b, t_link *first, t_link *second)
+{
+	t_link	*closest;
+	t_link	*current;
+	int		times;
+
+	(void)second;
+	closest = choose_insertion(b, first);
+	times = calc_rot_both(a, b, first, closest);
+	rr(a, b, times);
+	current = *a;
+	while (current != first)
+	{
+		ra(a);
+		current = *a;
+	}
+	current = *b;
+	while (current != closest)
+	{
+		rb(b);
+		current = *b;
+	}
 	pb(a, b);
 	if ((*b)->next && (*b)->index < (*b)->next->index)
 		sb(b);
