@@ -6,7 +6,7 @@
 /*   By: dulrich <dulrich@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 09:54:46 by dulrich           #+#    #+#             */
-/*   Updated: 2024/08/19 19:26:55 by dulrich          ###   ########.fr       */
+/*   Updated: 2024/08/20 20:35:32 by dulrich          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	push_swap(t_link **a, t_link **b)
 		sort_five(a, b);
 	else
 		sort_all(a, b, len);
-	/* print_stack(*a, "a after sorting");
+/* 	print_stack(*a, "a after sorting");
 	printf("%d\n", counter); */
 	free_links(a);
 }
