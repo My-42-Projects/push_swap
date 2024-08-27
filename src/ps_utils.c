@@ -6,7 +6,7 @@
 /*   By: dulrich <dulrich@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 10:00:14 by dulrich           #+#    #+#             */
-/*   Updated: 2024/08/18 19:30:59 by dulrich          ###   ########.fr       */
+/*   Updated: 2024/08/25 21:59:16 by dulrich          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,21 +34,31 @@ int	determine_rotation(t_link **stack, t_link *link)
 		return (0);
 }
 
-void	last_rotation(t_link **stack)
+void	last_rotation(t_link **stack, int is_a)
 {
-	t_link	*biggest;
+	t_link	*smallest;
 	t_link	*current;
 	int		norm_rot;
 
-	biggest = get_biggest_link(*stack);
-	norm_rot = determine_rotation(stack, biggest);
+	smallest = get_smallest_link(*stack);
+	norm_rot = determine_rotation(stack, smallest);
 	current = *stack;
-	while (current != biggest)
+	while (current != smallest)
 	{
-		if (norm_rot)
-			rb(stack);
+		if (is_a)
+		{
+			if (norm_rot)
+				ra(stack);
+			else
+				rra(stack);
+		}
 		else
-			rrb(stack);
+		{
+			if (norm_rot)
+				rb(stack);
+			else
+				rrb(stack);
+		}
 		current = *stack;
 	}
 }

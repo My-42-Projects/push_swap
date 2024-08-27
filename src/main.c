@@ -6,7 +6,7 @@
 /*   By: dulrich <dulrich@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 09:38:37 by dulrich           #+#    #+#             */
-/*   Updated: 2024/08/11 21:54:09 by dulrich          ###   ########.fr       */
+/*   Updated: 2024/08/27 06:16:10 by dulrich          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,13 @@ void	init_link(t_link **stack, int nbr, char **argv, int to_free)
 	new_link->chunk = 0;
 	new_link->r = 0;
 	new_link->rr = 0;
+	new_link->reverse = FALSE;
 	new_link->smallest = 0;
 	new_link->biggest = 0;
+	new_link->ops = 0;
+	new_link->target_r = 0;
+	new_link->target_rr = 0;
+	new_link->target = 0;
 	if (*stack == NULL)
 	{
 		*stack = new_link;
@@ -83,7 +88,7 @@ int	main(int argc, char **argv)
 		to_free = TRUE;
 	}
 	init_stack(&a, argv, to_free);
-	if (is_sorted(a, FALSE))
+	if (is_sorted(&a, FALSE))
 		free_links(&a);
 	else
 	{

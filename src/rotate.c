@@ -6,13 +6,11 @@
 /*   By: dulrich <dulrich@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 21:56:25 by dulrich           #+#    #+#             */
-/*   Updated: 2024/08/18 22:29:16 by dulrich          ###   ########.fr       */
+/*   Updated: 2024/08/25 16:42:57 by dulrich          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/push_swap.h"
-
-extern int	counter;
 
 void	rotate(t_link **stack, int reverse)
 {
@@ -53,14 +51,29 @@ void	rb(t_link **b)
 	write(1, "rb\n", 3);
 }
 
-void	rr(t_link **a, t_link **b, int times)
+void	rr(t_link **a, t_link **b)
 {
-	while (times > 0)
+	rotate(a, FALSE);
+	rotate(b, FALSE);
+	write(1, "rr\n", 3);
+}
+
+void	rotate_both(t_link **a, t_link **b, t_link *one, t_link *two, int i)
+{
+	while (i > 0)
 	{
-		rotate(a, FALSE);
-		rotate(b, FALSE);
-		write(1, "rr\n", 3);
-		times--;
-		counter++;
+		if (one->reverse)
+		{
+			rrr(a, b);
+			one->rr--;
+			two->target_rr--;
+		}
+		else
+		{
+			rr(a, b);
+			one->r--;
+			two->target_r--;
+		}
+		i--;
 	}
 }

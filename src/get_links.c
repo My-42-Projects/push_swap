@@ -6,7 +6,7 @@
 /*   By: dulrich <dulrich@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 11:37:32 by dulrich           #+#    #+#             */
-/*   Updated: 2024/08/17 21:37:39 by dulrich          ###   ########.fr       */
+/*   Updated: 2024/08/26 09:00:04 by dulrich          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,28 @@ t_link	*get_smallest_link(t_link *stack)
 	}
 	return (smallest);
 }
+
+/* int	is_closer(int to_push, int closest, int current)
+{
+	if (((to_push - current) < 0) && ((to_push - closest) < 0))
+	{
+		if (((to_push - current) * -1) < ((to_push - closest) * -1))
+				return (1);
+	}
+	else if ((to_push - current) < 0)
+	{
+		if (((to_push - current) * -1) < (to_push - closest))
+			return (1);
+	}
+	else if ((to_push - closest) < 0)
+	{
+		if ((to_push - current) < ((to_push - closest) * -1))
+			return (1);
+	}
+	else if ((to_push - current) < (to_push - closest))
+		return (1);
+	return (0);
+} */
 
 int	is_closer(int to_push, int closest, int current)
 {
