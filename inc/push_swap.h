@@ -6,7 +6,7 @@
 /*   By: dulrich <dulrich@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 14:30:44 by dulrich           #+#    #+#             */
-/*   Updated: 2024/08/25 21:53:41 by dulrich          ###   ########.fr       */
+/*   Updated: 2024/08/27 16:16:29 by dulrich          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ typedef struct s_link
 	int				smallest;
 	int				ops;
 	int				target;
+	int				above_mid;
+	int				below_mid;
 } t_link;
 
 //main.c

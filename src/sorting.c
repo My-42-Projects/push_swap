@@ -6,7 +6,7 @@
 /*   By: dulrich <dulrich@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 09:50:33 by dulrich           #+#    #+#             */
-/*   Updated: 2024/08/26 19:17:04 by dulrich          ###   ########.fr       */
+/*   Updated: 2024/08/27 15:46:48 by dulrich          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,22 +88,19 @@ void	find_target_below_mid(t_link *target, t_link **stack, int is_bigger)
 
 int	calc_remaining_ops(t_link *link, t_link *target, int i)
 {
-	if (i > 0)
+	if (link->reverse)
 	{
-		if (link->reverse)
-		{
-			if (i == link->rr && i != target->target_rr)
-				i += target->target_rr;
-			else if (i == target->target_rr && i != link->rr)
-				i += link->rr;
-		}
-		else
-		{
-			if (i == link->rr && i != target->target_rr)
-				i += target->target_rr;
-			else if (i == target->target_rr && i != link->rr)
-				i += link->rr;
-		}
+		if (i == link->rr && i != target->target_rr)
+			i += target->target_rr;
+		else if (i == target->target_rr && i != link->rr)
+			i += link->rr;
+	}
+	else
+	{
+		if (i == link->r && i != target->target_r)
+			i += target->target_r;
+		else if (i == target->target_r && i != link->r)
+			i += link->r;
 	}
 	return (i);
 }
@@ -217,8 +214,8 @@ void	get_cheapest_link(t_link **a, t_link **b)
 	}
 	cheapest_link = compare_operations(a);
 	target = get_target(b, cheapest_link);
-	print_stack(*a, "a");
+	/* print_stack(*a, "a");
 	printf("Cheapest link: %d with %d ops\n", cheapest_link->index, cheapest_link->ops);
-	printf("Target link: %d\n", target->index);
+	printf("Target link: %d\n", target->index); */
 	push_cheapest(a, b, cheapest_link, target);
 }

@@ -6,7 +6,7 @@
 /*   By: dulrich <dulrich@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 09:38:37 by dulrich           #+#    #+#             */
-/*   Updated: 2024/08/27 06:16:10 by dulrich          ###   ########.fr       */
+/*   Updated: 2024/08/27 16:17:14 by dulrich          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ void	init_link(t_link **stack, int nbr, char **argv, int to_free)
 	new_link->target_r = 0;
 	new_link->target_rr = 0;
 	new_link->target = 0;
+	new_link->above_mid = FALSE;
+	new_link->below_mid = FALSE;
 	if (*stack == NULL)
 	{
 		*stack = new_link;
