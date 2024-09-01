@@ -6,7 +6,7 @@
 /*   By: dulrich <dulrich@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 09:54:46 by dulrich           #+#    #+#             */
-/*   Updated: 2024/08/27 15:15:43 by dulrich          ###   ########.fr       */
+/*   Updated: 2024/09/01 17:39:42 by dulrich          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,62 +19,42 @@ void	push_swap(t_link **a, t_link **b)
 	len = stack_len(*a);
 	if (len == 2)
 		sa(a);
-	else if (len == 3)
-		sort_three(a);
+	/* if (len <= 5)
+		sort_five(a, b, len); */
 	else
-	{
-		pb(a, b);
-		pb(a, b);
 		sort_all(a, b);
-	}
-	/* print_stack(*a, "a after sorting");
-	print_stack(*b, "b after sorting"); */
+	print_stack(*a, "a after sorting");
+	print_stack(*b, "b after sorting");
 	free_links(a);
 }
 
-void	push_back(t_link **a, t_link **b)
+//not complete
+/* void	sort_five(t_link **a, t_link **b, int len)
 {
-	t_link	*target;
-	t_link	*current;
-	t_link	*to_push;
-	t_link	*biggest;
-	int		reverse;
 
-	current = *a;
-	to_push = *b;
-	biggest = get_biggest_link(*a);
-	if (to_push->index > biggest->index)
-		target = biggest;
-	else
-		target = get_closest_link(a, to_push, FALSE);
-	reverse = determine_rotation(a, target);
-/* 	print_stack(*b, "b before pushing");
-	print_stack(*a, "a before pushing");
-	printf("To push: %d\n", to_push->index);
-	printf("Target: %d\n", target->index); */
-	while (current != target)
-	{
-		if (reverse)
-			rra(a);
-		else
-			ra(a);
-		current = *a;
-	}
-	// if (target->index > to_push->index && reverse)
-	if (to_push->index > target->index)
-		ra(a);
-	pa(a, b);
-}
+	while (len-- > 3)
+		pb(a, b);
+	sort_three(a);
+	while (*b)
+		get_cheapest_link(a, b);
+	if (!is_sorted())
+		last_rotation();
+} */
 
 void	sort_all(t_link **a, t_link **b)
 {
 	while (stack_len(*a) > 3)
-		get_cheapest_link(a, b);
+		pb(a, b);
 	sort_three(a);
 	while (*b)
-		push_back(a, b);
-	if (!is_sorted(a, FALSE))
-		last_rotation(a, TRUE);
+	{
+		find_pos(*a);
+		find_pos(*b);
+		get_cheapest_link(a, b);
+	}
+	find_pos(*a);
+	if (!is_sorted(a, false))
+		last_rotation(a);
 }
 
 void	sort_three(t_link **stack)

@@ -6,7 +6,7 @@
 /*   By: dulrich <dulrich@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 13:42:35 by dulrich           #+#    #+#             */
-/*   Updated: 2024/08/10 10:46:17 by dulrich          ###   ########.fr       */
+/*   Updated: 2024/09/01 17:41:42 by dulrich          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,16 +52,13 @@ int	stack_len(t_link *stack)
 	return (len);
 }
 
-int	chunk_is_done(t_link **stack, int chunk)
+void	print_stack(t_link *stack, char *name)
 {
-	t_link	*head;
-
-	head = *stack;
-	while (head)
+	printf("Stack %s: ", name);
+	while (stack)
 	{
-		if (head->chunk == chunk)
-			return (0);
-		head = head->next;
+		printf("%d ", stack->index);
+		stack = stack->next;
 	}
-	return (1);
+	printf("\n");
 }

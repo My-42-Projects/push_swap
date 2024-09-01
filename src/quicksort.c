@@ -6,7 +6,7 @@
 /*   By: dulrich <dulrich@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 09:51:15 by dulrich           #+#    #+#             */
-/*   Updated: 2024/08/27 08:40:48 by dulrich          ###   ########.fr       */
+/*   Updated: 2024/08/28 21:06:08 by dulrich          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,6 @@ void	find_index(t_link *a)
 	len = stack_len(a);
 	sort = get_ints(a);
 	quicksort(sort, 0, len - 1);
-	allocate_chunks(&a, sort, 5, len / 5);
+	allocate_index(&a, sort);
 	free(sort);
 }

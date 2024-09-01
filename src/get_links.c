@@ -6,7 +6,7 @@
 /*   By: dulrich <dulrich@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 11:37:32 by dulrich           #+#    #+#             */
-/*   Updated: 2024/08/26 09:00:04 by dulrich          ###   ########.fr       */
+/*   Updated: 2024/09/01 17:30:53 by dulrich          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,30 +14,42 @@
 
 t_link	*get_first_link(t_link *head)
 {
-	while (head->prev)
-		head = head->prev;
-	return (head);
+	t_link	*current;
+
+	if (head == NULL)
+		return (NULL);
+	current = head;
+	while (current->prev)
+		current = current->prev;
+	return (current);
 }
 
 t_link	*get_last_link(t_link *head)
 {
+	t_link	*current;
+
 	if (head == NULL)
 		return (NULL);
-	while (head->next)
-		head = head->next;
-	return (head);
+	current = head;
+	while (current->next)
+		current = current->next;
+	return (current);
 }
 
 t_link	*get_biggest_link(t_link *stack)
 {
 	t_link	*biggest;
+	t_link	*current;
 
-	biggest = stack;
-	while (stack)
+	if (stack == NULL)
+		return (NULL);
+	current = stack;
+	biggest = current;
+	while (current)
 	{
-		if (stack->index > biggest->index)
-			biggest = stack;
-		stack = stack->next;
+		if (current->index > biggest->index)
+			biggest = current;
+		current = current->next;
 	}
 	return (biggest);
 }
@@ -45,82 +57,39 @@ t_link	*get_biggest_link(t_link *stack)
 t_link	*get_smallest_link(t_link *stack)
 {
 	t_link	*smallest;
+	t_link	*current;
 	
-	smallest = stack;
-	while (stack)
+	if (stack == NULL)
+		return (NULL);
+	current = stack;
+	smallest = current;
+	while (current)
 	{
-		if (stack->index < smallest->index)
-			smallest = stack;
-		stack = stack->next;
+		if (current->index < smallest->index)
+			smallest = current;
+		current = current->next;
 	}
 	return (smallest);
 }
 
-/* int	is_closer(int to_push, int closest, int current)
-{
-	if (((to_push - current) < 0) && ((to_push - closest) < 0))
-	{
-		if (((to_push - current) * -1) < ((to_push - closest) * -1))
-				return (1);
-	}
-	else if ((to_push - current) < 0)
-	{
-		if (((to_push - current) * -1) < (to_push - closest))
-			return (1);
-	}
-	else if ((to_push - closest) < 0)
-	{
-		if ((to_push - current) < ((to_push - closest) * -1))
-			return (1);
-	}
-	else if ((to_push - current) < (to_push - closest))
-		return (1);
-	return (0);
-} */
-
-int	is_closer(int to_push, int closest, int current)
-{
-	if ((to_push - current) < 0)
-	{
-		if (((to_push - current) * -1) < (to_push - closest))
-			return (1);
-		else if ((to_push - closest) < 0)
-		{
-			if (((to_push - current) * -1) < ((to_push - closest) * -1))
-				return (1);
-		}
-		else
-			return (0);
-	}
-	else if ((to_push - current) < (to_push - closest))
-		return (1);
-	return (0);
-}
-
-t_link	*get_closest_link(t_link **stack, t_link *link, int is_bigger)
+t_link	*get_closest_link(t_link **stack, t_link *to_push)
 {
 	t_link	*closest;
-	t_link	*current;
+	t_link	*current_a;
+	int		best;
 
-	closest = *stack;
-	current = *stack;
-	if (is_bigger)
+	best = INT_MAX;
+	current_a = *stack;
+	while (current_a)
 	{
-		while (current)
+		if (current_a->index > to_push->index && current_a->index < best)
 		{
-			if (current->index > closest->index)
-				closest = current;
-			current = current->next;
+			closest = current_a;
+			best = closest->index;
 		}
+		current_a = current_a->next;
 	}
-	else
-	{
-		while (current)
-		{
-			if (is_closer(link->index, closest->index, current->index))
-				closest = current;
-			current = current->next;
-		}
-	}
+	if (best == INT_MAX)
+		closest = get_smallest_link(*stack);
 	return (closest);
 }

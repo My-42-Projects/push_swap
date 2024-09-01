@@ -6,68 +6,73 @@
 /*   By: dulrich <dulrich@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 10:11:54 by dulrich           #+#    #+#             */
-/*   Updated: 2024/08/10 12:34:12 by dulrich          ###   ########.fr       */
+/*   Updated: 2024/09/01 17:34:37 by dulrich          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/push_swap.h"
 
-int	compare_moves(t_link *first, t_link *second)
+t_link	*compare_operations(t_link **stack)
 {
-	if (second != NULL && (second->rr < first->r))
-		return (0);
-	else
-		return (1);
-}
-
-t_link	*find_first_match(t_link **stack, t_link *link)
-{
-	int		r;
 	t_link	*current;
+	t_link	*cheapest;
 
-	if (!stack || !link)
-		return (NULL);
-	r = 0;
 	current = *stack;
+	cheapest = current;
 	while (current)
 	{
-		if (current == link)
-		{
-			link->r = r;
-			return (link);
-		}
-		r++;
+		if (current->ops < cheapest->ops)
+			cheapest = current;
 		current = current->next;
 	}
-	return (NULL);
+	return (cheapest);
 }
 
-t_link	*find_second_match(t_link **stack, t_link *link)
+void	calc_total_ops(t_link **a, t_link **b, t_link *to_push)
 {
-	int		rr;
-	t_link	*current;
-
-	if (!stack || !link)
-			return (NULL);
-	rr = 0;
-	current = get_last_link(*stack);
-	while (current->prev)
-	{
-		if (current == link)
-		{
-			link->rr = rr + 1;
-			return (link);
-		}
-		rr++;
-		current = current->prev;
-	}
-	return (NULL);
-}
-
-t_link	*calc_moves_to_push(t_link **stack, t_link *link, int first)
-{
-	if (first)
-		return(find_first_match(stack, link));
+	to_push->ops = to_push->pos;
+	if (!(to_push->above_mid))
+		to_push->ops = stack_len(*b) - to_push->pos;
+	if (to_push->target->above_mid)
+		to_push->ops += to_push->target->pos;
 	else
-		return (find_second_match(stack, link));
+		to_push->ops += stack_len(*a) - to_push->target->pos;
+}
+
+void	finish_rot(t_link **stack, t_link *to_top, char name)
+{
+	// static int counter = 0;
+
+	while (*stack != to_top)
+	{
+		if (name == 'a')
+		{
+			if (to_top->above_mid)
+				ra(stack);
+			else
+			{
+				rra(stack);
+				/* print_stack(*stack, "a");
+				t_link	*last = get_last_link(*stack);
+				t_link	*first = get_first_link(*stack);
+				printf("First in stack: %d\n", first->index);
+				printf("Last in stack: %d\n", last->index);
+				rra(stack);
+				printf("First in stack: %d\n", first->index);
+				printf("Last in stack: %d\n", last->index);
+				counter++;
+				print_stack(*stack, "a");
+				printf("To top: %d with pos %d\n", to_top->index, to_top->pos);
+				if (counter == 1)
+					exit(0); */
+			}
+		}
+		else if (name == 'b')
+		{
+			if (to_top->above_mid)
+				rb(stack);
+			else
+				rrb(stack);
+		}
+	}
 }

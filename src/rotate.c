@@ -6,7 +6,7 @@
 /*   By: dulrich <dulrich@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 21:56:25 by dulrich           #+#    #+#             */
-/*   Updated: 2024/08/25 16:42:57 by dulrich          ###   ########.fr       */
+/*   Updated: 2024/09/01 17:32:40 by dulrich          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,66 +14,62 @@
 
 void	rotate(t_link **stack, int reverse)
 {
+	t_link	*last;
 	int		len;
-	t_link	*last_link;
-	
+
 	len = stack_len(*stack);
-	if (*stack == NULL || stack == NULL || len == 1)
+	if (stack == NULL || *stack == NULL || len == 1)
 		return ;
-	last_link = get_last_link(*stack);
-	if (reverse)
+	last = get_last_link(*stack);
+	if (!reverse)
 	{
-		last_link->prev->next = NULL;
-		last_link->next = *stack;
-		last_link->prev = NULL;
-		*stack = last_link;
-		last_link->next->prev = last_link;
+		last->next = *stack;
+		*stack = (*stack)->next;
+		(*stack)->prev = NULL;
+		last->next->prev = last;
+		last->next->next = NULL;
 	}
 	else
 	{
-		last_link->next = *stack;
-		*stack = (*stack)->next;
-		(*stack)->prev = NULL;
-		last_link->next->prev = last_link;
-		last_link->next->next = NULL;
+		last->prev->next = NULL;
+		last->next = *stack;
+		last->prev = NULL;
+		*stack = last;
+		last->next->prev = last;
 	}
 }
 
 void	ra(t_link **a)
 {
-	rotate(a, FALSE);
+	rotate(a, false);
 	write(1, "ra\n", 3);
 }
 
 void	rb(t_link **b)
 {
-	rotate(b, FALSE);
+	rotate(b, false);
 	write(1, "rb\n", 3);
 }
 
 void	rr(t_link **a, t_link **b)
 {
-	rotate(a, FALSE);
-	rotate(b, FALSE);
+	rotate(a, false);
+	rotate(b, false);
 	write(1, "rr\n", 3);
 }
 
-void	rotate_both(t_link **a, t_link **b, t_link *one, t_link *two, int i)
+void	rotate_both(t_link **a, t_link **b, t_link *link, bool reverse)
 {
-	while (i > 0)
+	if (reverse)
 	{
-		if (one->reverse)
-		{
+		while (*a != link->target && *b != link)
 			rrr(a, b);
-			one->rr--;
-			two->target_rr--;
-		}
-		else
-		{
-			rr(a, b);
-			one->r--;
-			two->target_r--;
-		}
-		i--;
 	}
+	else
+	{
+		while (*a != link->target && *b != link)
+			rr(a, b);
+	}
+	find_pos(*a);
+	find_pos(*b);
 }

@@ -6,74 +6,36 @@
 /*   By: dulrich <dulrich@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 10:00:14 by dulrich           #+#    #+#             */
-/*   Updated: 2024/08/25 21:59:16 by dulrich          ###   ########.fr       */
+/*   Updated: 2024/09/01 17:42:35 by dulrich          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/push_swap.h"
 
-int	determine_rotation(t_link **stack, t_link *link)
-{
-	t_link	*current;
-	int	rot;
-	int	mid;
-
-	mid = stack_len(*stack) / 2;
-	current = *stack;
-	rot = -1;
-	while (current)
-	{
-		rot++;
-		if (current == link)
-			break ;
-		current = current->next;
-	}
-	if (rot <= mid)
-		return (1);
-	else
-		return (0);
-}
-
-void	last_rotation(t_link **stack, int is_a)
+void	last_rotation(t_link **stack)
 {
 	t_link	*smallest;
 	t_link	*current;
-	int		norm_rot;
 
 	smallest = get_smallest_link(*stack);
-	norm_rot = determine_rotation(stack, smallest);
 	current = *stack;
 	while (current != smallest)
 	{
-		if (is_a)
-		{
-			if (norm_rot)
-				ra(stack);
-			else
-				rra(stack);
-		}
+		if (smallest->above_mid)
+			ra(stack);
 		else
-		{
-			if (norm_rot)
-				rb(stack);
-			else
-				rrb(stack);
-		}
+			rra(stack);
 		current = *stack;
 	}
 }
 
-void	allocate_chunks(t_link **stack, int	*nbrs, int max_chunk, int nbrs_per_chunk)
+void	allocate_index(t_link **stack, int	*nbrs)
 {
 	int	i;
-	int	j;
 	int	len;
-	int	chunk;
 	t_link	*head;
 
 	i = 0;
-	j = 0;
-	chunk = 0;
 	len = stack_len(*stack);
 	head = get_first_link(*stack);
 	if (*stack == NULL)
@@ -86,20 +48,29 @@ void	allocate_chunks(t_link **stack, int	*nbrs, int max_chunk, int nbrs_per_chun
 			*stack = (*stack)->next;
 		if (nbrs[i] == (*stack)->nbr)
 		{
-			if (i == 0)
-				(*stack)->smallest = TRUE;
 			i++;
-			j++;
 			(*stack)->index = i;
-			(*stack)->chunk = chunk;
-			if (i == len)
-				(*stack)->biggest = TRUE;
 		}
-		if (j == nbrs_per_chunk)
-		{
-			j = 0;
-			if (chunk < max_chunk)
-				chunk++;
-		}
+	}
+}
+
+void	find_pos(t_link *stack)
+{
+	int	i;
+	int	mid;
+
+	if (stack == NULL)
+		return ;
+	i = 0;
+	mid = stack_len(stack) / 2;
+	while (stack)
+	{
+		stack->pos = i;
+		if (i <= mid)
+			stack->above_mid = true;
+		else
+			stack->above_mid = false;
+		stack = stack->next;
+		i++;
 	}
 }
