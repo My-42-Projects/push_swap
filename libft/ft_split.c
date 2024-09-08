@@ -6,7 +6,7 @@
 /*   By: dulrich <dulrich@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 12:26:31 by dulrich           #+#    #+#             */
-/*   Updated: 2024/08/12 08:30:41 by dulrich          ###   ########.fr       */
+/*   Updated: 2024/09/08 14:10:57 by dulrich          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,6 @@ static int	ft_count(const char *s, int c)
 		else
 			i++;
 	}
-	if (num_of_str < 2)
-		exit (0);
 	return (num_of_str);
 }
 
@@ -77,9 +75,9 @@ char	**ft_split(char const *s, char c)
 	int		i;
 	int		num_of_str;
 
-	if (!s)
-		return (NULL);
 	num_of_str = ft_count(s, c);
+	if (!num_of_str)
+		return (NULL);
 	str_arr = (char **)malloc((num_of_str + 1) * sizeof(char *));
 	if (!str_arr)
 		return (NULL);

@@ -6,7 +6,7 @@
 /*   By: dulrich <dulrich@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 09:38:37 by dulrich           #+#    #+#             */
-/*   Updated: 2024/09/01 17:28:37 by dulrich          ###   ########.fr       */
+/*   Updated: 2024/09/08 14:15:36 by dulrich          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,14 @@ int	main(int argc, char **argv)
 	a = NULL;
 	b = NULL;
 	to_free = false;
-	if (argc == 1 || (argc == 2 && !argv[1][0]))
+	if (argc == 1)
 		return (1);
-	else if (argc == 2)
+	if (argc == 2)
 	{
 		argv = ft_split(argv[1], ' ');
 		to_free = true;
+		if (!argv)
+			return (1);
 	}
 	init_stack(&a, argv, to_free);
 	if (is_sorted(&a, false))

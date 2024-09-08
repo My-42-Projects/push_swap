@@ -6,7 +6,7 @@
 /*   By: dulrich <dulrich@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 09:54:46 by dulrich           #+#    #+#             */
-/*   Updated: 2024/09/01 17:39:42 by dulrich          ###   ########.fr       */
+/*   Updated: 2024/09/08 13:58:48 by dulrich          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,16 @@ void	push_swap(t_link **a, t_link **b)
 	int	len;
 
 	len = stack_len(*a);
+	// print_stack(*a, "a before sorting");
+	// exit (1);
 	if (len == 2)
 		sa(a);
 	/* if (len <= 5)
 		sort_five(a, b, len); */
 	else
 		sort_all(a, b);
-	print_stack(*a, "a after sorting");
-	print_stack(*b, "b after sorting");
+	/* print_stack(*a, "a after sorting");
+	print_stack(*b, "b after sorting"); */
 	free_links(a);
 }
 
@@ -55,6 +57,15 @@ void	sort_all(t_link **a, t_link **b)
 	find_pos(*a);
 	if (!is_sorted(a, false))
 		last_rotation(a);
+	/* int i = 0;
+	t_link *current;
+	current = *a;
+	while (current)
+	{
+		i++;
+		current = current->next;
+	}
+	printf("%d\n", i); */
 }
 
 void	sort_three(t_link **stack)

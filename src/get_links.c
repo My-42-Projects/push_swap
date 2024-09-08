@@ -6,7 +6,7 @@
 /*   By: dulrich <dulrich@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 11:37:32 by dulrich           #+#    #+#             */
-/*   Updated: 2024/09/01 17:30:53 by dulrich          ###   ########.fr       */
+/*   Updated: 2024/09/08 13:18:46 by dulrich          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,9 @@ t_link	*get_first_link(t_link *head)
 
 t_link	*get_last_link(t_link *head)
 {
-	t_link	*current;
-
-	if (head == NULL)
-		return (NULL);
-	current = head;
-	while (current->next)
-		current = current->next;
-	return (current);
+	while (head && head->next)
+		head = head->next;
+	return (head);
 }
 
 t_link	*get_biggest_link(t_link *stack)
