@@ -6,7 +6,7 @@
 /*   By: dulrich <dulrich@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 14:30:44 by dulrich           #+#    #+#             */
-/*   Updated: 2024/09/08 12:29:27 by dulrich          ###   ########.fr       */
+/*   Updated: 2024/09/11 13:57:39 by dulrich          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,13 +62,14 @@ void	pa(t_link **a, t_link **b);
 void	push(t_link **dest, t_link **src);
 
 //rotate.c
-void	rotate(t_link **stack, int reverse);
+void	rotate(t_link **stack);
 void	ra(t_link **a);
 void	rb(t_link **b);
 void	rr(t_link **a, t_link **b);
 void	rotate_both(t_link **a, t_link **b, t_link *link, bool reverse);
 
 //rev_rotate.c
+void	rev_rotate(t_link **stack);
 void	rra(t_link **a);
 void	rrb(t_link **b);
 void	rrr(t_link **a, t_link **b);

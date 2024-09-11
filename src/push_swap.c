@@ -6,7 +6,7 @@
 /*   By: dulrich <dulrich@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 09:54:46 by dulrich           #+#    #+#             */
-/*   Updated: 2024/09/08 13:58:48 by dulrich          ###   ########.fr       */
+/*   Updated: 2024/09/11 14:14:49 by dulrich          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,31 +17,12 @@ void	push_swap(t_link **a, t_link **b)
 	int	len;
 
 	len = stack_len(*a);
-	// print_stack(*a, "a before sorting");
-	// exit (1);
 	if (len == 2)
 		sa(a);
-	/* if (len <= 5)
-		sort_five(a, b, len); */
 	else
 		sort_all(a, b);
-	/* print_stack(*a, "a after sorting");
-	print_stack(*b, "b after sorting"); */
 	free_links(a);
 }
-
-//not complete
-/* void	sort_five(t_link **a, t_link **b, int len)
-{
-
-	while (len-- > 3)
-		pb(a, b);
-	sort_three(a);
-	while (*b)
-		get_cheapest_link(a, b);
-	if (!is_sorted())
-		last_rotation();
-} */
 
 void	sort_all(t_link **a, t_link **b)
 {
@@ -57,15 +38,6 @@ void	sort_all(t_link **a, t_link **b)
 	find_pos(*a);
 	if (!is_sorted(a, false))
 		last_rotation(a);
-	/* int i = 0;
-	t_link *current;
-	current = *a;
-	while (current)
-	{
-		i++;
-		current = current->next;
-	}
-	printf("%d\n", i); */
 }
 
 void	sort_three(t_link **stack)
