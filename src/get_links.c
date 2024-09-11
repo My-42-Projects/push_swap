@@ -6,7 +6,7 @@
 /*   By: dulrich <dulrich@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 11:37:32 by dulrich           #+#    #+#             */
-/*   Updated: 2024/09/08 13:18:46 by dulrich          ###   ########.fr       */
+/*   Updated: 2024/09/11 14:26:28 by dulrich          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ t_link	*get_smallest_link(t_link *stack)
 {
 	t_link	*smallest;
 	t_link	*current;
-	
+
 	if (stack == NULL)
 		return (NULL);
 	current = stack;

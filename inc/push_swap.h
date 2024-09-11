@@ -6,15 +6,14 @@
 /*   By: dulrich <dulrich@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 14:30:44 by dulrich           #+#    #+#             */
-/*   Updated: 2024/09/11 13:57:39 by dulrich          ###   ########.fr       */
+/*   Updated: 2024/09/11 14:37:51 by dulrich          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
- #define PUSH_SWAP_H
+# define PUSH_SWAP_H
 
 # include <stdlib.h>
-# include <stdio.h>
 # include <stdbool.h>
 # include <unistd.h>
 # include <limits.h>
@@ -30,7 +29,7 @@ typedef struct s_link
 	int				index;
 	int				pos;
 	int				ops;
-} t_link;
+}	t_link;
 
 //main.c
 int		main(int argc, char **argv);
@@ -97,9 +96,6 @@ void	ps_error(t_link **stack);
 
 //quicksort.c
 void	find_index(t_link *a);
-int		*get_ints(t_link *stack);
-int		*quicksort(int *nbrs, int first, int last);
-int		partition(int *nbrs, int first, int last);
 
 //sorting.c
 void	push_cheapest(t_link **a, t_link **b, t_link *to_push);
@@ -109,6 +105,5 @@ void	get_cheapest_link(t_link **a, t_link **b);
 t_link	*compare_operations(t_link **stack);
 void	finish_rot(t_link **stack, t_link *to_top, char name);
 void	calc_total_ops(t_link **a, t_link **b, t_link *link);
-
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: dulrich <dulrich@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 09:51:15 by dulrich           #+#    #+#             */
-/*   Updated: 2024/08/28 21:06:08 by dulrich          ###   ########.fr       */
+/*   Updated: 2024/09/11 14:28:36 by dulrich          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 static void	ft_swap(int *a, int *b)
 {
 	int	tmp;
-	
+
 	tmp = *a;
 	*a = *b;
 	*b = tmp;
 }
 
-int	partition(int *nbrs, int first, int last)
+static int	partition(int *nbrs, int first, int last)
 {
 	int	i;
 	int	j;
@@ -43,7 +43,7 @@ int	partition(int *nbrs, int first, int last)
 	return (i);
 }
 
-int	*quicksort(int *nbrs, int first, int last)
+static int	*quicksort(int *nbrs, int first, int last)
 {
 	int	partition_index;
 
@@ -56,7 +56,7 @@ int	*quicksort(int *nbrs, int first, int last)
 	return (nbrs);
 }
 
-int	*get_ints(t_link *stack)
+static int	*get_ints(t_link *stack)
 {
 	int	*nbrs;
 	int	i;

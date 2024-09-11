@@ -6,7 +6,7 @@
 /*   By: dulrich <dulrich@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 10:00:14 by dulrich           #+#    #+#             */
-/*   Updated: 2024/09/01 17:42:35 by dulrich          ###   ########.fr       */
+/*   Updated: 2024/09/11 14:26:54 by dulrich          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ void	last_rotation(t_link **stack)
 
 void	allocate_index(t_link **stack, int	*nbrs)
 {
-	int	i;
-	int	len;
+	int		i;
+	int		len;
 	t_link	*head;
 
 	i = 0;

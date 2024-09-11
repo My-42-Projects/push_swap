@@ -6,7 +6,7 @@
 /*   By: dulrich <dulrich@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 07:54:36 by dulrich           #+#    #+#             */
-/*   Updated: 2024/09/01 16:41:30 by dulrich          ###   ########.fr       */
+/*   Updated: 2024/09/11 14:27:22 by dulrich          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	push(t_link **dest, t_link **src)
 {
 	t_link	*to_push;
-	
+
 	if (!(*src))
 		return ;
 	to_push = *src;
